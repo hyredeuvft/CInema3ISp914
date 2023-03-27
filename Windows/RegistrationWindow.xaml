@@ -1,0 +1,152 @@
+﻿<Window x:Class="Cinema.Windows.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema.Windows"
+        mc:Ignorable="d"
+        Title="RegistrationWindow" 
+        Height="700" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush RadiusX="0.9" RadiusY="0.9">
+                <GradientStop Color="#8B74D4"/>
+                <GradientStop Color="#220A6E" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1"
+                CornerRadius="50"
+                Opacity="0.5"
+                Margin="62,57,62,38" Grid.Column="1">
+            <Border.Background>
+                <RadialGradientBrush RadiusX="0.5" RadiusY="0.5">
+                    <GradientStop Color="#FE5454"/>
+                    <GradientStop Color="#FE9595" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel HorizontalAlignment="Center"
+                    Panel.ZIndex="1"
+                    VerticalAlignment="Top" Margin="0,97,0,0">
+            <TextBlock Text="Регистрация"
+                       FontSize="25"
+                       HorizontalAlignment="Center"
+                       FontWeight="Medium"
+                       Margin="0 15 0 0"
+                       />
+            <TextBlock Text="Введите фамилию"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbLastName"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Введите имя"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbFirstName"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Введите дату рождения"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <DatePicker  x:Name="DpBirthDay"
+                         FontSize="14"
+                         Height="30"
+                         Width="200"
+                         Margin="0 10 0 0"
+                         HorizontalAlignment="Center"
+                       />
+        </StackPanel>
+        <Border BorderThickness="1"
+                CornerRadius="50"
+                Opacity="0.5"
+                Margin="62,64,62,31">
+            <Border.Background>
+                <RadialGradientBrush RadiusX="0.5" RadiusY="0.5">
+                    <GradientStop Color="#FE5454"/>
+                    <GradientStop Color="#FE9595" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Grid.Column="1">
+            <TextBlock Text="Введите номер телефона"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbPhoneNumber"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Введите Email"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbEmail"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Введите пароль"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 20 0 0"
+                       />
+            <PasswordBox   x:Name="PbPassword"
+                           Style="{StaticResource ResourceKey=pbStyle}"
+                           Margin="0 10 0 0"
+                       />
+            <Button x:Name="BtnSignIn"
+                    Content="Войти"
+                    Margin="0 20 0 0"
+                    Style="{StaticResource btnStyle}" Click="BtnSignIn_Click"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Panel.ZIndex="1"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Cinema House"
+                       FontSize="35"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Center"
+                       FontStyle="Italic"
+                       />
+            <TextBlock x:Name="TbSignIn"
+                       Text="Уже есть аккаунт? Войдите прямо сейчас"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       Margin="0 15 0 0"
+                       MouseLeftButtonUp="TbSignIn_MouseLeftButtonUp"
+                       
+                       />
+        </StackPanel>
+        <Border BorderThickness="1"
+                CornerRadius="50"
+                Opacity="0.5"
+                Margin="62,57,62,38" Grid.Column="2">
+            <Border.Background>
+                <RadialGradientBrush RadiusX="0.5" RadiusY="0.5">
+                    <GradientStop Color="#FE5454"/>
+                    <GradientStop Color="#FE9595" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+    </Grid>
+</Window>
