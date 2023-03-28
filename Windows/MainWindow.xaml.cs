@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Cinema.ClassHelper;
+using Cinema.DB;
+using Cinema.Windows;
+using static Cinema.ClassHelper.EFClass;
+
 namespace Cinema
 {
     /// <summary>
@@ -23,6 +28,22 @@ namespace Cinema
         public MainWindow()
         {
             InitializeComponent();
+
+            GetFilm();
+        }
+
+        private void GetFilm()
+        {
+            List<Film> films = new List<Film>();
+            films = Contextmy.Film.ToList();
+            LvFilmList.ItemsSource = films;
+        }
+
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            InfoFilmWindow infoFilmWindow = new InfoFilmWindow();
+            infoFilmWindow.Show();
+            this.Hide();
         }
     }
 }

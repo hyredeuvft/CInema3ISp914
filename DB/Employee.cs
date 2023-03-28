@@ -31,6 +31,8 @@ namespace Cinema.DB
         public byte IdGender { get; set; }
         public System.DateTime Birthday { get; set; }
         public byte IdEmployeePosition { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CashReceipt> CashReceipt { get; set; }

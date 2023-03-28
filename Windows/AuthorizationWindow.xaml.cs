@@ -46,18 +46,37 @@ namespace Cinema.Windows
                 }
                 else
                 {
-                    var authUser = Contextmy.User.ToList()
-                    .Where(i => i.Email == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
-                    if (authUser != null)
+                    if(TbLogin.Text.Substring(0, 3) == "EMP")
                     {
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
-                        this.Close();
+                        var authEmp = Contextmy.Employee.ToList()
+                        .Where(i => i.Login == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
+                        if (authEmp != null)
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                        var authUser = Contextmy.User.ToList()
+                        .Where(i => i.Email == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
+                        if (authUser != null)
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                        }
                     }
+                        
                 }
             }
             catch (Exception ec)

@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Cinema.Pages
+namespace Cinema.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для InfoFilmWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class InfoFilmWindow : Window
     {
-        public Window1()
+        public InfoFilmWindow()
         {
             InitializeComponent();
         }

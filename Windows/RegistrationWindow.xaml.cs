@@ -61,7 +61,9 @@ namespace Cinema.Windows
 
             Contextmy.User.Add(user);
             Contextmy.SaveChanges();
-            MessageBox.Show("QWERTYIOPPP");
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
 
         private void TbSignIn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

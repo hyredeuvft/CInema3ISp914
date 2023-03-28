@@ -10,16 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cinema.Res
+using Cinema.ClassHelper;
+using Cinema.DB;
+using static Cinema.ClassHelper.EFClass;
+using static Cinema.ClassHelper.NavigateClass;
+
+namespace Cinema.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для AddEditFilmPage.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class AddEditFilmPage : Page
     {
-        public Window1()
+        public AddEditFilmPage()
+        {
+            InitializeComponent();
+        }
+
+        public AddEditFilmPage(Film film)
         {
             InitializeComponent();
         }
