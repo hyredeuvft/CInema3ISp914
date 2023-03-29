@@ -13,32 +13,60 @@
             <ColumnDefinition Width="325"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="#259238"
-                BorderThickness="1"
-                Margin="50,55,50,392"
-                Width="200"
-                Height="320"
-                Background="#00C322"
-                Grid.Column="0">
-            <StackPanel>
-                <Image Height="318"
+        <StackPanel Grid.Column="0">
+            <Image Height="318"
                        Width="198">
-                </Image>
-                <TextBlock Text="{Binding MovieTitle}"
-                           FontSize="18"
+            </Image>
+            <TextBlock x:Name="TbTitle"
+                           FontSize="22"
                            FontWeight="Bold"
                            Margin="5 0 0 0"
+                           Foreground="Black"
+                           Text="2222"
                            TextWrapping="Wrap"/>
 
-                <TextBlock Text="{Binding Rating}"
+            <TextBlock     FontSize="18"
+                           FontWeight="Light"
+                           Margin="10 0 0 0"
+                           x:Name="TbRating"/>
+            <TextBlock 
                            FontSize="18"
                            FontWeight="Light"
+                           x:Name="TbDuration"
                            Margin="10 0 0 0"/>
-                <TextBlock Text="{Binding DurationInMinute}"
-                           FontSize="18"
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock x:Name="TbTitle20"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Margin="5 0 0 0"
+                           Foreground="Black"
+                           Text="2222"
+                           TextWrapping="Wrap"/>
+            <TextBlock     FontSize="18"
                            FontWeight="Light"
-                           Margin="10 0 0 0"/>
-            </StackPanel>
-        </Border>
+                           Margin="10 0 0 0"
+                           x:Name="TbRating20"/>
+            <TextBlock     FontSize="18"
+                           FontWeight="Light"
+                           Margin="10 0 0 0"
+                           x:Name="TbDescription" Height="84" Width="809"/>
+            <TextBlock     FontSize="18"
+                           FontWeight="Light"
+                           x:Name="TbDirector"/>
+            <TextBlock     FontSize="18"
+                           FontWeight="Light"
+                           Margin="10 0 0 0"
+                           x:Name="TbPremierDate"/>
+        </StackPanel>
+        <Button x:Name="btnBuy"
+                Style="{StaticResource btnStyle}"
+                Content="Купить билет" Grid.Column="1" HorizontalAlignment="Left" Margin="136,600,0,59"
+            />
+        <Button x:Name="btnCancel"
+                Style="{StaticResource btnStyle}"
+                Content="Назад" Grid.Column="1" HorizontalAlignment="Left" Margin="295,600,0,59" Click="btnCancel_Click"
+            />
     </Grid>
 </Window>

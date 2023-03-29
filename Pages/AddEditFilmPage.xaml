@@ -5,39 +5,38 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cinema.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1500"
       Title="AddEditFilmPage">
 
-    <Grid Margin="0,0,-16,-171">
+    <Grid Margin="0,0,-222,-171">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="42*"/>
-            <RowDefinition Height="353*"/>
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="482"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#250672" Offset="0.05"/>
-                <GradientStop Color="#220A6E" Offset="0.25"/>
-                <GradientStop Color="#8B74D4" Offset="0.85"/>
-                <GradientStop Color="White" Offset="1.1"/>
+                <GradientStop Color="White" Offset="0.05"/>
+                <GradientStop Color="#FF4C00" Offset="0.25"/>
+                <GradientStop Color="#220A6E" Offset="0.85"/>
+                <GradientStop Color="#250672" Offset="1.1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock Grid.ColumnSpan="2"
-                   Grid.Row="0"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
+        <TextBlock
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
                    Text="Добавление/изменение фильма"
                    FontSize="25"
-                   FontWeight="ExtraBold">
-        </TextBlock>
-        <StackPanel Grid.Column="0"
-                    HorizontalAlignment="Center"
+                   FontWeight="ExtraBold" Height="34" Width="420" Grid.ColumnSpan="2" Margin="523,0,0,0"/>
+        <StackPanel
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Grid.Row="1">
+            Grid.Column="0"
+                    Grid.Row="1" Margin="351,0,0,0">
             <TextBlock Text="Введите название фильма"
                        FontSize="18"
                        Foreground="AliceBlue"
@@ -89,112 +88,96 @@
                        HorizontalAlignment="Left"
                        Margin="0 15 0 0"
                        />
-            <TextBox   x:Name="TbPremierDate"
-                       Style="{StaticResource ResourceKey=tbStyle}"
-                       Margin="0 10 0 0"
+            <DatePicker   x:Name="TbPremierDate"
+                          Height="26"
+                          Width="241"
+                       Margin="0 15 0 0"
                        />
         </StackPanel>
-        <TextBlock Text="Введите возрастное ограничение"
+
+        <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Grid.Row="1" Margin="801,0,0,0" Grid.ColumnSpan="2">
+            <TextBlock Text="Введите возрастное ограничение"
                        FontSize="18"
                        Foreground="AliceBlue"
                        FontWeight="DemiBold"
-                       Grid.Column="1"
-                       Grid.Row="1"
-                       HorizontalAlignment="Left"
-                       Margin="0,36,0,417" 
-                       Width="240"
-                       Height="40"
+                       Margin="0 15 0 0"
+                       HorizontalAlignment="Left"                
                        />
-        <ComboBox   x:Name="CbAgeRestriction"
+            <ComboBox   x:Name="CmbAgeRestriction"
                     Width="240"
                     Height="40"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                    Grid.Column="1"
-                    Grid.Row="1" Margin="0,70,0,377"
+                        Margin="0 15 0 0"
                        />
-        <TextBlock Text="Введите рейтинг фильма"
+            <TextBlock Text="Введите рейтинг фильма"
                    FontSize="18"
                    Foreground="AliceBlue"
                    FontWeight="DemiBold"
                    HorizontalAlignment="Left"
-                   Grid.Column="1"
-                   Grid.Row="1"
-                   Margin="0,126,0,332"
-                   Width="240"
-                   Height="40"
+                   Margin="0 15 0 0"        
                        />
-        <TextBox   x:Name="TbMovieRating"
-                   Style="{StaticResource ResourceKey=tbStyle}"
-                   Margin="0,155,0,292"
-                   Grid.Column="1"
-                   Grid.Row="1" 
+            <TextBox   x:Name="TbMovieRating"
+                   Style="{StaticResource ResourceKey=tbStyle}"     
+                   Margin="0 15 0 0"
                    HorizontalAlignment="Left"
-                   Width="240"
-                   Height="40"
+                  
                        />
-        <TextBlock Text="Введите название киностудии"
+            <TextBlock Text="Введите название киностудии"
                    FontSize="18"
                    Foreground="AliceBlue"
                    FontWeight="DemiBold"
                    HorizontalAlignment="Left"
-                   Grid.Column="1"
-                   Grid.Row="1"
-                   Margin="0,209,0,243"
-                   Width="240"
-                   Height="40"
+                   Margin="0 15 0 0" 
                        />
-        <ComboBox   x:Name="CbMovieStudio" 
-                    Margin="0,244,168,208"
-                    Grid.Column="1"
-                    Grid.Row="1"
+            <ComboBox   x:Name="CmbMovieStudio"                     
+                    HorizontalAlignment="Left"
+                    Margin="0 15 0 0"                       
                     Width="240"
                     Height="40"
                        />
-        <TextBlock Text="Введите бюджет фильма"
+            <TextBlock Text="Введите бюджет фильма"
                    FontSize="18"
                    Foreground="AliceBlue"
                    FontWeight="DemiBold"
                    HorizontalAlignment="Left"
-                   Grid.Column="1"
-                   Grid.Row="1"
-                   Margin="0,306,0,147"
-                   Width="240"
-                   Height="40"
+                   Margin="0 15 0 0"
                        />
-        <TextBox   x:Name="TbMovieBudget"
+            <TextBox   x:Name="TbMovieBudget"
                    Style="{StaticResource ResourceKey=tbStyle}"
-                   Margin="0,340,0,107"
-                   Grid.Column="1"
-                   Grid.Row="1" HorizontalAlignment="Left"
-                   Width="240"
-                   Height="40"
+                   Margin="0 15 0 0"
+                   HorizontalAlignment="Left"
+                  
                        />
-        <TextBlock Text="Введите прокатчика фильма"
+            <TextBlock Text="Введите прокатчика фильма"
                    FontSize="18"
                    Foreground="AliceBlue"
                    FontWeight="DemiBold"
-                   Grid.Column="1"
-                   Grid.Row="1"
+                   Margin="0 15 0 0"
                    HorizontalAlignment="Left"
-                   Margin="0,396,0,65"
-                   Width="240"
-                   Height="40"
+                  
                        />
-        <ComboBox   x:Name="CbMovieDistributor"
-                    Margin="0,433,174,21"
-                    Grid.Column="1"
-                    Grid.Row="1"
+            <ComboBox   x:Name="CmbMovieDistributor"
+                    HorizontalAlignment="Left"
+                    Margin="0 15 0 0"
                     Width="240"
                     Height="40"
                        />
-        
+
+        </StackPanel>
+
         <Button x:Name="btnSave"
                 Style="{StaticResource btnStyle}"
-                Grid.ColumnSpan="2"
                 Content="Сохранить"
                 Grid.Row="2"
+                FontSize="20"
+                VerticalAlignment="Top" 
+                Height="49" Margin="673,16,0,0" 
+                Width="120" HorizontalAlignment="Left" Click="btnSave_Click"
             />
     </Grid>
 </Page>

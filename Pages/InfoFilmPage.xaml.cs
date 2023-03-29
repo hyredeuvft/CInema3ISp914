@@ -111,6 +111,7 @@ namespace Cinema.Pages
                     Contextmy.Film.Remove(item);
                     Contextmy.SaveChanges();
                     MessageBox.Show("Фильм успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    frame.Navigate(new InfoFilmPage());
                 }
                 else
                 { }

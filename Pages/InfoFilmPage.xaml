@@ -18,7 +18,8 @@
         <WrapPanel Grid.Row="0" VerticalAlignment="Center">
             <TextBlock Text="Поиск"
                        Margin="10"
-                       FontSize="20"/>
+                       FontSize="20"
+                       />
 
             <TextBox x:Name="TxbSearch"
                      Width="200"
@@ -32,7 +33,9 @@
                        FontSize="20"/>
             <ComboBox x:Name="CmbSort"
                       Width="200"
-                      Height="35" SelectionChanged ="CmbSort_SelectionChanged"/>
+                      Height="35"
+                      FontSize="18"
+                      SelectionChanged ="CmbSort_SelectionChanged"/>
         </WrapPanel>
 
 

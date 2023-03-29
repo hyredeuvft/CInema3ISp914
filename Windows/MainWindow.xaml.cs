@@ -41,9 +41,13 @@ namespace Cinema
 
         private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            InfoFilmWindow infoFilmWindow = new InfoFilmWindow();
-            infoFilmWindow.Show();
-            this.Hide();
+            if (LvFilmList.SelectedItem is Film)
+            {
+                Film film = LvFilmList.SelectedItem as Film;
+                InfoFilmWindow infoFilmWindow = new InfoFilmWindow(film);
+                infoFilmWindow.Show();
+                this.Hide();
+            }
         }
     }
 }
