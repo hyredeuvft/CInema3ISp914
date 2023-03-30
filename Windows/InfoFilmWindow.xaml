@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:Cinema.Windows"
         mc:Ignorable="d"
         Title="InfoFilmWindow" 
-        Height="800" Width="1200"
+        Height="900" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="325"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <TextBlock x:Name="TbId" Margin="112,414,91,328"
+            />
         <StackPanel Grid.Column="0">
             <Image Height="318"
                        Width="198">
@@ -59,14 +61,24 @@
                            FontWeight="Light"
                            Margin="10 0 0 0"
                            x:Name="TbPremierDate"/>
+            
         </StackPanel>
-        <Button x:Name="btnBuy"
-                Style="{StaticResource btnStyle}"
-                Content="Купить билет" Grid.Column="1" HorizontalAlignment="Left" Margin="136,600,0,59"
-            />
+        <StackPanel Grid.Column="1" Margin="0,295,0,0">
+            <TextBlock Text="Сеансы:"
+                       FontSize="22"
+                       FontWeight="Light"
+                       Margin="10 0 0 0"/>
+            <TextBlock 
+                x:Name="TbSession1"
+                       FontSize="18"
+                       FontWeight="Light"
+                       Margin="10 0 0 0"
+                       />
+        </StackPanel>
         <Button x:Name="btnCancel"
                 Style="{StaticResource btnStyle}"
-                Content="Назад" Grid.Column="1" HorizontalAlignment="Left" Margin="295,600,0,59" Click="btnCancel_Click"
+                Content="Назад" Grid.Column="1" HorizontalAlignment="Left"
+                Click="btnCancel_Click" Margin="215,579,0,170"
             />
     </Grid>
 </Window>

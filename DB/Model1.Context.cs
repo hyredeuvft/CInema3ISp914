@@ -30,7 +30,6 @@ namespace Cinema.DB
         public virtual DbSet<AgeRestriction> AgeRestriction { get; set; }
         public virtual DbSet<CashReceipt> CashReceipt { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Cinema> Cinema { get; set; }
         public virtual DbSet<CreatorCountry> CreatorCountry { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<EmployeePosition> EmployeePosition { get; set; }
@@ -40,6 +39,7 @@ namespace Cinema.DB
         public virtual DbSet<MovieDistributor> MovieDistributor { get; set; }
         public virtual DbSet<MovieHall> MovieHall { get; set; }
         public virtual DbSet<MovieStudio> MovieStudio { get; set; }
+        public virtual DbSet<NetCinema> NetCinema { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductCashReceipt> ProductCashReceipt { get; set; }
         public virtual DbSet<Provider> Provider { get; set; }

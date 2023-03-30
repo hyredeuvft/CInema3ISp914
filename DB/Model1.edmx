@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Cinema3ISP9_14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Cinema3ISP9_14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgeRestriction">
           <Key>
             <PropertyRef Name="IdAgeRestriction" />
@@ -28,17 +28,6 @@
           </Key>
           <Property Name="IdCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Cinema">
-          <Key>
-            <PropertyRef Name="IdCinema" />
-          </Key>
-          <Property Name="IdCinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CinemaTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PhoneNumber" Type="char" MaxLength="11" Nullable="false" />
-          <Property Name="CinemaEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="IdEmployee" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CinemaFilm">
           <Key>
@@ -161,6 +150,17 @@
           <Property Name="IdMovieStudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudioTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="NetCinema">
+          <Key>
+            <PropertyRef Name="IdCinema" />
+          </Key>
+          <Property Name="IdCinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CinemaTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="CinemaEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -381,21 +381,21 @@
         </Association>
         <Association Name="FK_Cinema_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IdEmployee" />
             </Principal>
-            <Dependent Role="Cinema">
+            <Dependent Role="NetCinema">
               <PropertyRef Name="IdEmployee" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CinemaFilm_Cinema">
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="1" />
           <End Role="CinemaFilm" Type="Self.CinemaFilm" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cinema">
+            <Principal Role="NetCinema">
               <PropertyRef Name="IdCinema" />
             </Principal>
             <Dependent Role="CinemaFilm">
@@ -548,10 +548,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MovieHall_Cinema">
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="1" />
           <End Role="MovieHall" Type="Self.MovieHall" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Cinema">
+            <Principal Role="NetCinema">
               <PropertyRef Name="IdCinema" />
             </Principal>
             <Dependent Role="MovieHall">
@@ -750,7 +750,6 @@
           <EntitySet Name="AgeRestriction" EntityType="Self.AgeRestriction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CashReceipt" EntityType="Self.CashReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cinema" EntityType="Self.Cinema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CinemaFilm" EntityType="Self.CinemaFilm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CreatorCountry" EntityType="Self.CreatorCountry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -764,6 +763,7 @@
           <EntitySet Name="MovieDistributor" EntityType="Self.MovieDistributor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MovieHall" EntityType="Self.MovieHall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MovieStudio" EntityType="Self.MovieStudio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NetCinema" EntityType="Self.NetCinema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCashReceipt" EntityType="Self.ProductCashReceipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductProvider" EntityType="Self.ProductProvider" Schema="dbo" store:Type="Tables" />
@@ -846,10 +846,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cinema_Employee" Association="Self.FK_Cinema_Employee">
             <End Role="Employee" EntitySet="Employee" />
-            <End Role="Cinema" EntitySet="Cinema" />
+            <End Role="NetCinema" EntitySet="NetCinema" />
           </AssociationSet>
           <AssociationSet Name="FK_CinemaFilm_Cinema" Association="Self.FK_CinemaFilm_Cinema">
-            <End Role="Cinema" EntitySet="Cinema" />
+            <End Role="NetCinema" EntitySet="NetCinema" />
             <End Role="CinemaFilm" EntitySet="CinemaFilm" />
           </AssociationSet>
           <AssociationSet Name="FK_CinemaFilm_Film" Association="Self.FK_CinemaFilm_Film">
@@ -901,7 +901,7 @@
             <End Role="FilmGenre" EntitySet="FilmGenre" />
           </AssociationSet>
           <AssociationSet Name="FK_MovieHall_Cinema" Association="Self.FK_MovieHall_Cinema">
-            <End Role="Cinema" EntitySet="Cinema" />
+            <End Role="NetCinema" EntitySet="NetCinema" />
             <End Role="MovieHall" EntitySet="MovieHall" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
@@ -949,7 +949,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Cinema3ISP9_14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -983,20 +984,6 @@
           <Property Name="CategoryTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
-        <EntityType Name="Cinema">
-          <Key>
-            <PropertyRef Name="IdCinema" />
-          </Key>
-          <Property Name="IdCinema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CinemaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="CinemaEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Cinema_Employee" FromRole="Cinema" ToRole="Employee" />
-          <NavigationProperty Name="MovieHall" Relationship="Self.FK_MovieHall_Cinema" FromRole="Cinema" ToRole="MovieHall" />
-          <NavigationProperty Name="Film" Relationship="Self.CinemaFilm" FromRole="Cinema" ToRole="Film" />
-        </EntityType>
         <EntityType Name="CreatorCountry">
           <Key>
             <PropertyRef Name="IdCreatorCountry" />
@@ -1018,13 +1005,13 @@
           <Property Name="IdGender" Type="Byte" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdEmployeePosition" Type="Byte" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CashReceipt" Relationship="Self.FK_CashReceipt_Employee" FromRole="Employee" ToRole="CashReceipt" />
-          <NavigationProperty Name="Cinema" Relationship="Self.FK_Cinema_Employee" FromRole="Employee" ToRole="Cinema" />
+          <NavigationProperty Name="NetCinema" Relationship="Self.FK_Cinema_Employee" FromRole="Employee" ToRole="NetCinema" />
           <NavigationProperty Name="EmployeePosition" Relationship="Self.FK_Employee_EmployeePosition" FromRole="Employee" ToRole="EmployeePosition" />
           <NavigationProperty Name="Gender" Relationship="Self.FK_Employee_Gender" FromRole="Employee" ToRole="Gender" />
           <NavigationProperty Name="MovieHall" Relationship="Self.EmployeeMovieHall" FromRole="Employee" ToRole="MovieHall" />
-          <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EmployeePosition">
           <Key>
@@ -1055,7 +1042,7 @@
           <NavigationProperty Name="MovieDistributor" Relationship="Self.FK_Film_MovieDistributor" FromRole="Film" ToRole="MovieDistributor" />
           <NavigationProperty Name="MovieStudio" Relationship="Self.FK_Film_MovieStudio" FromRole="Film" ToRole="MovieStudio" />
           <NavigationProperty Name="SessionFilm" Relationship="Self.FK_SessionFilm_Film" FromRole="Film" ToRole="SessionFilm" />
-          <NavigationProperty Name="Cinema" Relationship="Self.CinemaFilm" FromRole="Film" ToRole="Cinema" />
+          <NavigationProperty Name="NetCinema" Relationship="Self.CinemaFilm" FromRole="Film" ToRole="NetCinema" />
           <NavigationProperty Name="CreatorCountry" Relationship="Self.FilmCreatorCountry" FromRole="Film" ToRole="CreatorCountry" />
           <NavigationProperty Name="Genre" Relationship="Self.FilmGenre" FromRole="Film" ToRole="Genre" />
         </EntityType>
@@ -1095,7 +1082,7 @@
           <Property Name="HallNumber" Type="Byte" Nullable="false" />
           <Property Name="IdCinema" Type="Int32" Nullable="false" />
           <Property Name="CountPlace" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Cinema" Relationship="Self.FK_MovieHall_Cinema" FromRole="MovieHall" ToRole="Cinema" />
+          <NavigationProperty Name="NetCinema" Relationship="Self.FK_MovieHall_Cinema" FromRole="MovieHall" ToRole="NetCinema" />
           <NavigationProperty Name="SessionFilm" Relationship="Self.FK_SessionFilm_MovieHall" FromRole="MovieHall" ToRole="SessionFilm" />
           <NavigationProperty Name="Employee" Relationship="Self.EmployeeMovieHall" FromRole="MovieHall" ToRole="Employee" />
         </EntityType>
@@ -1107,6 +1094,20 @@
           <Property Name="StudioTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Film" Relationship="Self.FK_Film_MovieStudio" FromRole="MovieStudio" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="NetCinema">
+          <Key>
+            <PropertyRef Name="IdCinema" />
+          </Key>
+          <Property Name="IdCinema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CinemaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CinemaEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Cinema_Employee" FromRole="NetCinema" ToRole="Employee" />
+          <NavigationProperty Name="MovieHall" Relationship="Self.FK_MovieHall_Cinema" FromRole="NetCinema" ToRole="MovieHall" />
+          <NavigationProperty Name="Film" Relationship="Self.CinemaFilm" FromRole="NetCinema" ToRole="Film" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1351,25 +1352,13 @@
         </Association>
         <Association Name="FK_Cinema_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IdEmployee" />
             </Principal>
-            <Dependent Role="Cinema">
+            <Dependent Role="NetCinema">
               <PropertyRef Name="IdEmployee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovieHall_Cinema">
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
-          <End Role="MovieHall" Type="Self.MovieHall" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cinema">
-              <PropertyRef Name="IdCinema" />
-            </Principal>
-            <Dependent Role="MovieHall">
-              <PropertyRef Name="IdCinema" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1433,6 +1422,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MovieHall_Cinema">
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="1" />
+          <End Role="MovieHall" Type="Self.MovieHall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NetCinema">
+              <PropertyRef Name="IdCinema" />
+            </Principal>
+            <Dependent Role="MovieHall">
+              <PropertyRef Name="IdCinema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SessionFilm_MovieHall">
           <End Role="MovieHall" Type="Self.MovieHall" Multiplicity="1" />
           <End Role="SessionFilm" Type="Self.SessionFilm" Multiplicity="*" />
@@ -1482,7 +1483,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="CinemaFilm">
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
+          <End Role="NetCinema" Type="Self.NetCinema" Multiplicity="*" />
           <End Role="Film" Type="Self.Film" Multiplicity="*" />
         </Association>
         <Association Name="EmployeeMovieHall">
@@ -1509,7 +1510,6 @@
           <EntitySet Name="AgeRestriction" EntityType="Self.AgeRestriction" />
           <EntitySet Name="CashReceipt" EntityType="Self.CashReceipt" />
           <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Cinema" EntityType="Self.Cinema" />
           <EntitySet Name="CreatorCountry" EntityType="Self.CreatorCountry" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" />
@@ -1519,6 +1519,7 @@
           <EntitySet Name="MovieDistributor" EntityType="Self.MovieDistributor" />
           <EntitySet Name="MovieHall" EntityType="Self.MovieHall" />
           <EntitySet Name="MovieStudio" EntityType="Self.MovieStudio" />
+          <EntitySet Name="NetCinema" EntityType="Self.NetCinema" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductCashReceipt" EntityType="Self.ProductCashReceipt" />
           <EntitySet Name="Provider" EntityType="Self.Provider" />
@@ -1554,11 +1555,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cinema_Employee" Association="Self.FK_Cinema_Employee">
             <End Role="Employee" EntitySet="Employee" />
-            <End Role="Cinema" EntitySet="Cinema" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovieHall_Cinema" Association="Self.FK_MovieHall_Cinema">
-            <End Role="Cinema" EntitySet="Cinema" />
-            <End Role="MovieHall" EntitySet="MovieHall" />
+            <End Role="NetCinema" EntitySet="NetCinema" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_EmployeePosition" Association="Self.FK_Employee_EmployeePosition">
             <End Role="EmployeePosition" EntitySet="EmployeePosition" />
@@ -1580,6 +1577,10 @@
             <End Role="Film" EntitySet="Film" />
             <End Role="SessionFilm" EntitySet="SessionFilm" />
           </AssociationSet>
+          <AssociationSet Name="FK_MovieHall_Cinema" Association="Self.FK_MovieHall_Cinema">
+            <End Role="NetCinema" EntitySet="NetCinema" />
+            <End Role="MovieHall" EntitySet="MovieHall" />
+          </AssociationSet>
           <AssociationSet Name="FK_SessionFilm_MovieHall" Association="Self.FK_SessionFilm_MovieHall">
             <End Role="MovieHall" EntitySet="MovieHall" />
             <End Role="SessionFilm" EntitySet="SessionFilm" />
@@ -1597,7 +1598,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="CinemaFilm" Association="Self.CinemaFilm">
-            <End Role="Cinema" EntitySet="Cinema" />
+            <End Role="NetCinema" EntitySet="NetCinema" />
             <End Role="Film" EntitySet="Film" />
           </AssociationSet>
           <AssociationSet Name="EmployeeMovieHall" Association="Self.EmployeeMovieHall">
@@ -1621,17 +1622,17 @@
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <FunctionImport Name="PR_AddFinalTime">
-          <Parameter Name="IdFilm" Mode="In" Type="Int32" />
+            <Parameter Name="IdFilm" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_AddFinalTimeStart">
-          <Parameter Name="IdFilm" Mode="In" Type="Int32" />
+            <Parameter Name="IdFilm" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_ListFilm" ReturnType="Collection(Cinema3ISP9_14Model.PR_ListFilm_Result)">
             <Parameter Name="DateStart" Mode="In" Type="String" />
             <Parameter Name="DateEnd" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PR_MinusCountProduct">
-          <Parameter Name="IdProd" Mode="In" Type="Int32" />
+            <Parameter Name="IdProd" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_RecordOnFilm">
             <Parameter Name="FilmTitle" Mode="In" Type="String" />
@@ -1730,18 +1731,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cinema">
-            <EntityTypeMapping TypeName="Cinema3ISP9_14Model.Cinema">
-              <MappingFragment StoreEntitySet="Cinema">
-                <ScalarProperty Name="IdCinema" ColumnName="IdCinema" />
-                <ScalarProperty Name="CinemaTitle" ColumnName="CinemaTitle" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="CinemaEmail" ColumnName="CinemaEmail" />
-                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CreatorCountry">
             <EntityTypeMapping TypeName="Cinema3ISP9_14Model.CreatorCountry">
               <MappingFragment StoreEntitySet="CreatorCountry">
@@ -1753,8 +1742,6 @@
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="Cinema3ISP9_14Model.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1764,6 +1751,8 @@
                 <ScalarProperty Name="IdGender" ColumnName="IdGender" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="IdEmployeePosition" ColumnName="IdEmployeePosition" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1838,6 +1827,18 @@
                 <ScalarProperty Name="IdMovieStudio" ColumnName="IdMovieStudio" />
                 <ScalarProperty Name="StudioTitle" ColumnName="StudioTitle" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NetCinema">
+            <EntityTypeMapping TypeName="Cinema3ISP9_14Model.NetCinema">
+              <MappingFragment StoreEntitySet="NetCinema">
+                <ScalarProperty Name="IdCinema" ColumnName="IdCinema" />
+                <ScalarProperty Name="CinemaTitle" ColumnName="CinemaTitle" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CinemaEmail" ColumnName="CinemaEmail" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2004,7 +2005,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="CinemaFilm" TypeName="Cinema3ISP9_14Model.CinemaFilm" StoreEntitySet="CinemaFilm">
-            <EndProperty Name="Cinema">
+            <EndProperty Name="NetCinema">
               <ScalarProperty Name="IdCinema" ColumnName="IdCinema" />
             </EndProperty>
             <EndProperty Name="Film">

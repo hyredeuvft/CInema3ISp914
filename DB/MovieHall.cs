@@ -27,7 +27,7 @@ namespace Cinema.DB
         public int IdCinema { get; set; }
         public byte CountPlace { get; set; }
     
-        public virtual Cinema Cinema { get; set; }
+        public virtual NetCinema NetCinema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionFilm> SessionFilm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

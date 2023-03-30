@@ -55,6 +55,18 @@ namespace Cinema.Windows
             }
             TbDirector.Text = film.Director;
             TbPremierDate.Text = Convert.ToString(film.PremierDate);
+            var Id1 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
+            var Id2 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
+            var Id3 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
+            if (Id1 != null)
+            {
+                TbSession1.Text = Convert.ToString(Id1.DateTimeStart);
+            }
+            else
+            {
+                TbSession1.Text = "Отсутствуют";
+            }
+            
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

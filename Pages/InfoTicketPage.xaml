@@ -1,4 +1,4 @@
-﻿<Page x:Class="Cinema.Pages.InfoFilmPage"
+﻿<Page x:Class="Cinema.Pages.InfoTicketPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Cinema.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="InfoFilmPage">
+      Title="InfoTicketPage">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -44,17 +44,11 @@
                   AutoGenerateColumns="False"
             VerticalScrollBarVisibility="Hidden">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="IdFilm" Binding="{Binding IdFilm}"/>
-                <DataGridTextColumn Header="MovieTitle" Binding="{Binding MovieTitle}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="Director" Binding="{Binding Director}"/>
-                <DataGridTextColumn Header="DurationInMinute" Binding="{Binding DurationInMinute}"/>
-                <DataGridTextColumn Header="PremierDate" Binding="{Binding PremierDate}"/>
-                <DataGridTextColumn Header="IdAgeRestriction" Binding="{Binding IdAgeRestriction}"/>
-                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
-                <DataGridTextColumn Header="IdMovieStudio" Binding="{Binding IdMovieStudio}"/>
-                <DataGridTextColumn Header="MovieBudget" Binding="{Binding MovieBudget}"/>
-                <DataGridTextColumn Header="IdMovieDistributor" Binding="{Binding IdMovieDistributor}"/>
+                <DataGridTextColumn Header="IdTicket" Binding="{Binding IdTicket}"/>
+                <DataGridTextColumn Header="IdSessionFilm" Binding="{Binding IdSessionFilm}"/>
+                <DataGridTextColumn Header="Row" Binding="{Binding Row}"/>
+                <DataGridTextColumn Header="Place" Binding="{Binding Place}"/>
+                <DataGridTextColumn Header="FinalPrice" Binding="{Binding FinalPrice}"/>
             </DataGrid.Columns>
 
         </DataGrid>
@@ -62,18 +56,15 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">
             <Button x:Name="btnAdd"
-                    Content="Добавить фильм"
+                    Content="Добавить билет"
                     Style="{StaticResource btnStyle}"
                     Margin="10"
                     Width="172" Click="btnAdd_Click"/>
             <Button x:Name="btnEdit"
-                    Content="Изменить фильм"
+                    Content="Изменить билет"
                     Margin="10"
-                    Style="{StaticResource btnStyle}" Width="172" Click="btnEdit_Click"/>
-            <Button x:Name="btnDelete"
-                    Content="Удалить фильм"
-                    Margin="10"
-                    Style="{StaticResource btnStyle}" Width="172" Click="btnDelete_Click"/>
+                    Style="{StaticResource btnStyle}"
+                    Width="172" Click="btnEdit_Click"/>
         </WrapPanel>
     </Grid>
 </Page>

@@ -12,10 +12,10 @@ namespace Cinema.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Cinema
+    public partial class NetCinema
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cinema()
+        public NetCinema()
         {
             this.MovieHall = new HashSet<MovieHall>();
             this.Film = new HashSet<Film>();

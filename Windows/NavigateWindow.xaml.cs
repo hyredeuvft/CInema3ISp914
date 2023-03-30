@@ -29,14 +29,20 @@ namespace Cinema.Windows
         {
             InitializeComponent();
             NavigateClass.frame = frameMenu;
-
-
         }
         
         private void btnForFilm_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new InfoFilmPage());
-            
+            InfoFilmPage infoFilmPage = new InfoFilmPage();
+            frame.Navigate(infoFilmPage);
+            this.Close();
+        }
+
+        private void btnForCashReceipt_Click(object sender, RoutedEventArgs e)
+        {
+            InfoCashReceiptPage infoCashReceiptPage = new InfoCashReceiptPage();
+            frame.Navigate(infoCashReceiptPage);
+            this.Close();
         }
     }
 }

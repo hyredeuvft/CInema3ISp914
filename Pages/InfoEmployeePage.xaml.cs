@@ -13,84 +13,81 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 using Cinema.ClassHelper;
 using Cinema.DB;
 using static Cinema.ClassHelper.EFClass;
 using static Cinema.ClassHelper.NavigateClass;
-
 namespace Cinema.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для InfoFilmPage.xaml
+    /// Логика взаимодействия для InfoEmployeePage.xaml
     /// </summary>
-    public partial class InfoFilmPage : Page
+    public partial class InfoEmployeePage : Page
     {
-        List<Film> films = new List<Film>();
+        List<Employee> employee = new List<Employee>();
         List<string> sortList = new List<string>()
         {
             "По умолчанию",
-            "По названию",
-            "По рейтингу",
-            "По дате премьеры"
+            "По фамилии",
+            "По имени",
+            "По возрасту"
         };
-
-
-        public InfoFilmPage()
+        public InfoEmployeePage()
         {
             InitializeComponent();
             CmbSort.ItemsSource = sortList;
             CmbSort.SelectedIndex = 0;
-            GetListFilm();
+            GetListEmployee();
         }
-
-        private void GetListFilm()
+        private void GetListEmployee()
         {
 
-            films = Contextmy.Film.ToList();
-            films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
-            || i.Description.Contains(TxbSearch.Text)
-            || i.Director.Contains(TxbSearch.Text)).ToList();
+            employee = Contextmy.Employee.ToList();
+            employee = employee.Where(i => i.LastName.Contains(TxbSearch.Text)
+            || i.FirstName.Contains(TxbSearch.Text)
+            || Convert.ToString(i.Birthday).Contains(TxbSearch.Text)).ToList();
             switch (CmbSort.SelectedIndex)
             {
                 case 0:
-                    films = films.OrderBy(i => i.IdFilm).ToList();
+                    employee = employee.OrderBy(i => i.IdEmployee).ToList();
                     break;
                 case 1:
-                    films = films.OrderBy(i => i.MovieTitle).ToList();
+                    employee = employee.OrderBy(i => i.LastName).ToList();
                     break;
                 case 2:
-                    films = films.OrderBy(i => i.Rating).ToList();
+                    employee = employee.OrderBy(i => i.FirstName).ToList();
                     break;
                 case 3:
-                    films = films.OrderBy(i => i.PremierDate).ToList();
+                    employee = employee.OrderBy(i => i.Birthday).ToList();
                     break;
-                default: 
+                default:
                     break;
             }
-            Dg.ItemsSource = films;
-        }
-
-        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GetListFilm();
+            Dg.ItemsSource = employee;
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            GetListFilm();
+            GetListEmployee();
+        }
+
+        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetListEmployee();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new AddEditFilmPage());
+            frame.Navigate(new AddEditEmployeePage());
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is Employee)
             {
-                var films = Dg.SelectedItem as Film;
-                frame.Navigate(new Pages.AddEditFilmPage(films));
+                var employee = Dg.SelectedItem as Employee;
+                frame.Navigate(new Pages.AddEditEmployeePage(employee));
             }
             else
             {
@@ -100,16 +97,16 @@ namespace Cinema.Pages
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is Employee)
             {
-                var item = Dg.SelectedItem as Film;
-                GetListFilm();
-                var dialogResult = MessageBox.Show("Вы действительно хотите удалить фильм?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var item = Dg.SelectedItem as Employee;
+                GetListEmployee();
+                var dialogResult = MessageBox.Show("Вы действительно хотите удалить сотрудника?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (dialogResult == MessageBoxResult.Yes)
                 {
-                    Contextmy.Film.Remove(item);
+                    Contextmy.Employee.Remove(item);
                     Contextmy.SaveChanges();
-                    MessageBox.Show("Фильм успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Сотрудник успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
                     frame.Navigate(new InfoFilmPage());
                 }
                 else

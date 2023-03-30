@@ -21,10 +21,40 @@
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0"
                    VerticalAlignment="Center"
-                   Margin="5">
+                   HorizontalAlignment="Center"
+                   Margin="100 0 100 0">
             <Button x:Name="btnForFilm"
                     Content="Фильмы"
+                    Margin="5"
                     Style="{StaticResource btnStyle}" Click="btnForFilm_Click"/>
+            <Button x:Name="btnForCashReceipt"
+                    Content="Чеки"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}" Click="btnForCashReceipt_Click"/>
+            <Button x:Name="btnForCinema"
+                    Content="Кинотеатры"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnForEmployee"
+                    Content="Сотрудники"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnForProduct"
+                    Content="Продукты"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnForSession"
+                    Content="Сеансы"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnForTIcket"
+                    Content="Билеты"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
+            <Button x:Name="btnForUser"
+                    Content="Покупатели"
+                    Margin="5"
+                    Style="{StaticResource btnStyle}"/>
         </WrapPanel>
         <Frame x:Name="frameMenu"
                NavigationUIVisibility="Hidden"

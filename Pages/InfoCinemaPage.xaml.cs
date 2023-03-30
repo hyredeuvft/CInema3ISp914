@@ -21,76 +21,74 @@ using static Cinema.ClassHelper.NavigateClass;
 namespace Cinema.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для InfoFilmPage.xaml
+    /// Логика взаимодействия для InfoCinemaPage.xaml
     /// </summary>
-    public partial class InfoFilmPage : Page
+    public partial class InfoCinemaPage : Page
     {
-        List<Film> films = new List<Film>();
+
+        List<NetCinema> cinema = new List<NetCinema>();
         List<string> sortList = new List<string>()
         {
             "По умолчанию",
-            "По названию",
-            "По рейтингу",
-            "По дате премьеры"
+            "По названию кинотеатра",
+            "По адресу"        
         };
-
-
-        public InfoFilmPage()
+        public InfoCinemaPage()
         {
             InitializeComponent();
             CmbSort.ItemsSource = sortList;
             CmbSort.SelectedIndex = 0;
-            GetListFilm();
+            GetListCinema();
         }
 
-        private void GetListFilm()
+        private void GetListCinema()
         {
 
-            films = Contextmy.Film.ToList();
-            films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
-            || i.Description.Contains(TxbSearch.Text)
-            || i.Director.Contains(TxbSearch.Text)).ToList();
+            cinema = Contextmy.NetCinema.ToList();
+            cinema = cinema.Where(i => i.CinemaTitle.Contains(TxbSearch.Text)
+            || i.Address.Contains(TxbSearch.Text)
+            || i.PhoneNumber.Contains(TxbSearch.Text)).ToList();
             switch (CmbSort.SelectedIndex)
             {
                 case 0:
-                    films = films.OrderBy(i => i.IdFilm).ToList();
+                    cinema = cinema.OrderBy(i => i.IdCinema).ToList();
                     break;
                 case 1:
-                    films = films.OrderBy(i => i.MovieTitle).ToList();
+                    cinema = cinema.OrderBy(i => i.CinemaTitle).ToList();
                     break;
                 case 2:
-                    films = films.OrderBy(i => i.Rating).ToList();
+                    cinema = cinema.OrderBy(i => i.Address).ToList();
                     break;
                 case 3:
-                    films = films.OrderBy(i => i.PremierDate).ToList();
+                    cinema = cinema.OrderBy(i => i.PhoneNumber).ToList();
                     break;
-                default: 
+                default:
                     break;
             }
-            Dg.ItemsSource = films;
+            Dg.ItemsSource = cinema;
         }
 
         private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GetListFilm();
+            GetListCinema();
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            GetListFilm();
+            GetListCinema();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new AddEditFilmPage());
+            frame.Navigate(new AddEditNetCinemaPage());
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is NetCinema)
             {
-                var films = Dg.SelectedItem as Film;
-                frame.Navigate(new Pages.AddEditFilmPage(films));
+                var cinema = Dg.SelectedItem as NetCinema;
+                frame.Navigate(new Pages.AddEditNetCinemaPage(cinema));
             }
             else
             {
@@ -100,16 +98,16 @@ namespace Cinema.Pages
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is NetCinema)
             {
-                var item = Dg.SelectedItem as Film;
-                GetListFilm();
-                var dialogResult = MessageBox.Show("Вы действительно хотите удалить фильм?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var item = Dg.SelectedItem as NetCinema;
+                GetListCinema();
+                var dialogResult = MessageBox.Show("Вы действительно хотите удалить кинотеатр?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (dialogResult == MessageBoxResult.Yes)
                 {
-                    Contextmy.Film.Remove(item);
+                    Contextmy.NetCinema.Remove(item);
                     Contextmy.SaveChanges();
-                    MessageBox.Show("Фильм успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Кинотеатр успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
                     frame.Navigate(new InfoFilmPage());
                 }
                 else

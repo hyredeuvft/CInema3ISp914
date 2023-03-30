@@ -18,7 +18,7 @@ namespace Cinema.DB
         public Film()
         {
             this.SessionFilm = new HashSet<SessionFilm>();
-            this.Cinema = new HashSet<Cinema>();
+            this.NetCinema = new HashSet<NetCinema>();
             this.CreatorCountry = new HashSet<CreatorCountry>();
             this.Genre = new HashSet<Genre>();
         }
@@ -41,7 +41,7 @@ namespace Cinema.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SessionFilm> SessionFilm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cinema> Cinema { get; set; }
+        public virtual ICollection<NetCinema> NetCinema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CreatorCountry> CreatorCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

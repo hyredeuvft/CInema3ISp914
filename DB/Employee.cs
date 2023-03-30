@@ -18,7 +18,7 @@ namespace Cinema.DB
         public Employee()
         {
             this.CashReceipt = new HashSet<CashReceipt>();
-            this.Cinema = new HashSet<Cinema>();
+            this.NetCinema = new HashSet<NetCinema>();
             this.MovieHall = new HashSet<MovieHall>();
         }
     
@@ -37,7 +37,7 @@ namespace Cinema.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CashReceipt> CashReceipt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cinema> Cinema { get; set; }
+        public virtual ICollection<NetCinema> NetCinema { get; set; }
         public virtual EmployeePosition EmployeePosition { get; set; }
         public virtual Gender Gender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

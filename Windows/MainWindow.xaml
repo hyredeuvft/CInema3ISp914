@@ -23,6 +23,27 @@
                    FontWeight="Medium"
                    Margin="0 10 0 0"
             />
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center">
+            <TextBlock Text="Поиск"
+                       Margin="10"
+                       FontSize="20"
+                       />
+            <TextBox x:Name="TxbSearch"
+                     Width="200"
+                     Height="35"
+                     FontSize="18" 
+                     VerticalContentAlignment="Center"
+                     TextChanged ="TxbSearch_TextChanged"/>
+
+            <TextBlock Text="Сортировка"
+                        Margin="10"
+                       FontSize="20"/>
+            <ComboBox x:Name="CmbSort"
+                      Width="200"
+                      Height="35"
+                      FontSize="18"
+                      SelectionChanged ="CmbSort_SelectionChanged" />
+        </WrapPanel>
 
         <ListView x:Name="LvFilmList" 
                   Grid.Row="2"
@@ -41,14 +62,13 @@
                 <DataTemplate>
                     <Border BorderBrush="#259238"
                             BorderThickness="1"
-                            Margin="5"
-                            Width="200"
-                            Height="320"
+                            Width="184"
+                            Height="302"
                             Background="#00C322"
-                            MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                            MouseLeftButtonUp="Border_MouseLeftButtonUp" Margin="5">
                         <StackPanel>
-                            <Image Height="266"
-                                   Width="200">
+                            <Image Height="239"
+                                   Width="198">
                             </Image>
                             <TextBlock Text="{Binding MovieTitle}"
                                        FontSize="18"
@@ -61,7 +81,9 @@
                                        FontWeight="Light"
                                        Margin="10 0 0 0"/>
                         </StackPanel>
+
                     </Border>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
 

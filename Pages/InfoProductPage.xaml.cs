@@ -21,76 +21,68 @@ using static Cinema.ClassHelper.NavigateClass;
 namespace Cinema.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для InfoFilmPage.xaml
+    /// Логика взаимодействия для InfoProductPage.xaml
     /// </summary>
-    public partial class InfoFilmPage : Page
+    public partial class InfoProductPage : Page
     {
-        List<Film> films = new List<Film>();
+        List<Product> products = new List<Product>();
         List<string> sortList = new List<string>()
         {
             "По умолчанию",
             "По названию",
-            "По рейтингу",
-            "По дате премьеры"
+            "По стоимости"
         };
-
-
-        public InfoFilmPage()
+        public InfoProductPage()
         {
             InitializeComponent();
             CmbSort.ItemsSource = sortList;
             CmbSort.SelectedIndex = 0;
-            GetListFilm();
+            GetListProduct();
         }
-
-        private void GetListFilm()
+        private void GetListProduct()
         {
 
-            films = Contextmy.Film.ToList();
-            films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
-            || i.Description.Contains(TxbSearch.Text)
-            || i.Director.Contains(TxbSearch.Text)).ToList();
+            products = Contextmy.Product.ToList();
+            products = (List<Product>)products.Where(i => i.ProductTitle.Contains(TxbSearch.Text)
+            || Convert.ToString(i.Cost).Contains(TxbSearch.Text));
             switch (CmbSort.SelectedIndex)
             {
                 case 0:
-                    films = films.OrderBy(i => i.IdFilm).ToList();
+                    products = products.OrderBy(i => i.IdProduct).ToList();
                     break;
                 case 1:
-                    films = films.OrderBy(i => i.MovieTitle).ToList();
+                    products = products.OrderBy(i => i.ProductTitle).ToList();
                     break;
                 case 2:
-                    films = films.OrderBy(i => i.Rating).ToList();
-                    break;
-                case 3:
-                    films = films.OrderBy(i => i.PremierDate).ToList();
-                    break;
-                default: 
+                    products = products.OrderBy(i => i.Cost).ToList();
+                    break;              
+                default:
                     break;
             }
-            Dg.ItemsSource = films;
-        }
-
-        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            GetListFilm();
+            Dg.ItemsSource = products;
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            GetListFilm();
+            GetListProduct();
+        }
+
+        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetListProduct();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new AddEditFilmPage());
+            frame.Navigate(new AddEditProductPage());
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is Product)
             {
-                var films = Dg.SelectedItem as Film;
-                frame.Navigate(new Pages.AddEditFilmPage(films));
+                var product = Dg.SelectedItem as Product;
+                frame.Navigate(new Pages.AddEditProductPage(product));
             }
             else
             {
@@ -100,14 +92,14 @@ namespace Cinema.Pages
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (Dg.SelectedItem is Film)
+            if (Dg.SelectedItem is Product)
             {
-                var item = Dg.SelectedItem as Film;
-                GetListFilm();
+                var item = Dg.SelectedItem as Product;
+                GetListProduct();
                 var dialogResult = MessageBox.Show("Вы действительно хотите удалить фильм?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (dialogResult == MessageBoxResult.Yes)
                 {
-                    Contextmy.Film.Remove(item);
+                    Contextmy.Product.Remove(item);
                     Contextmy.SaveChanges();
                     MessageBox.Show("Фильм успешно удален!", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
                     frame.Navigate(new InfoFilmPage());

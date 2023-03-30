@@ -25,11 +25,51 @@ namespace Cinema
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Film> films = new List<Film>();
+        List<string> sortList = new List<string>()
+        {
+            "По умолчанию",
+            "По названию",
+            "По рейтингу",
+            "По дате премьеры"
+        };
         public MainWindow()
         {
             InitializeComponent();
 
+            CmbSort.ItemsSource = sortList;
+            CmbSort.SelectedIndex = 0;
+            GetListFilm();
+
             GetFilm();
+        }
+
+        private void GetListFilm()
+        {
+            films = Contextmy.Film.ToList();
+
+            films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
+            || i.Description.Contains(TxbSearch.Text)
+            || i.Director.Contains(TxbSearch.Text)).ToList();
+
+            switch (CmbSort.SelectedIndex)
+            {
+                case 0:
+                    films = films.OrderBy(i => i.IdFilm).ToList();
+                    break;
+                case 1:
+                    films = films.OrderBy(i => i.MovieTitle).ToList();
+                    break;
+                case 2:
+                    films = films.OrderBy(i => i.Rating).ToList();
+                    break;
+                case 3:
+                    films = films.OrderBy(i => i.PremierDate).ToList();
+                    break;
+                default:
+                    break;
+            }
+            LvFilmList.ItemsSource = films;
         }
 
         private void GetFilm()
@@ -46,8 +86,18 @@ namespace Cinema
                 Film film = LvFilmList.SelectedItem as Film;
                 InfoFilmWindow infoFilmWindow = new InfoFilmWindow(film);
                 infoFilmWindow.Show();
-                this.Hide();
+                this.Close();
             }
+        }
+
+        private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GetListFilm();
+        }
+
+        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetListFilm();
         }
     }
 }
