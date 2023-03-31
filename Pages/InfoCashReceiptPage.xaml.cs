@@ -47,9 +47,6 @@ namespace Cinema.Pages
         {
 
             cashReceipt = Contextmy.CashReceipt.ToList();
-            cashReceipt = (List<CashReceipt>)cashReceipt.Where(i => Convert.ToString(i.DateSale).Contains(TxbSearch.Text)
-            || Convert.ToString(i.FullCost)
-            .Contains(TxbSearch.Text));
             switch (CmbSort.SelectedIndex)
             {
                 case 0:

@@ -35,14 +35,48 @@ namespace Cinema.Windows
         {
             InfoFilmPage infoFilmPage = new InfoFilmPage();
             frame.Navigate(infoFilmPage);
-            this.Close();
         }
 
         private void btnForCashReceipt_Click(object sender, RoutedEventArgs e)
         {
             InfoCashReceiptPage infoCashReceiptPage = new InfoCashReceiptPage();
             frame.Navigate(infoCashReceiptPage);
-            this.Close();
+        }
+
+        private void btnForCinema_Click(object sender, RoutedEventArgs e)
+        {
+            InfoCinemaPage infoCinemaPage = new InfoCinemaPage();
+            frame.Navigate(infoCinemaPage);
+        }
+
+        private void btnForEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            InfoEmployeePage infoEmployeePage = new InfoEmployeePage();
+            frame.Navigate(infoEmployeePage);
+        }
+
+        private void btnForProduct_Click(object sender, RoutedEventArgs e)
+        {
+            InfoProductPage infoProductPage = new InfoProductPage();
+            frame.Navigate(infoProductPage);
+        }
+
+        private void btnForSession_Click(object sender, RoutedEventArgs e)
+        {
+            InfoSessionPage infoSessionPage = new InfoSessionPage();
+            frame.Navigate(infoSessionPage);
+        }
+
+        private void btnForTIcket_Click(object sender, RoutedEventArgs e)
+        {
+            InfoTicketPage infoTicketPage = new InfoTicketPage();
+            frame.Navigate(infoTicketPage);
+        }
+
+        private void btnForUser_Click(object sender, RoutedEventArgs e)
+        {
+            InfoUserPage infoUserPage = new InfoUserPage();
+            frame.Navigate(infoUserPage);
         }
     }
 }

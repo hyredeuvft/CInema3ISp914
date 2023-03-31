@@ -43,8 +43,6 @@ namespace Cinema.Pages
         {
 
             products = Contextmy.Product.ToList();
-            products = (List<Product>)products.Where(i => i.ProductTitle.Contains(TxbSearch.Text)
-            || Convert.ToString(i.Cost).Contains(TxbSearch.Text));
             switch (CmbSort.SelectedIndex)
             {
                 case 0:

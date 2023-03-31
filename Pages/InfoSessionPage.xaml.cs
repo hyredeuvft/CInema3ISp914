@@ -44,8 +44,6 @@ namespace Cinema.Pages
         {
 
             sessionFilms = Contextmy.SessionFilm.ToList();
-            sessionFilms = (List<SessionFilm>)sessionFilms.Where(i => Convert.ToString(i.DateTimeStart).Contains(TxbSearch.Text)
-            || Convert.ToString(i.Price).Contains(TxbSearch.Text));
             switch (CmbSort.SelectedIndex)
             {
                 case 0:

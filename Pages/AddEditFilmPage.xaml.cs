@@ -49,8 +49,6 @@ namespace Cinema.Pages
         public AddEditFilmPage(Film film)
         {
             InitializeComponent();
-
-            btnSave.Content = "Сохранить";
             CmbAgeRestriction.ItemsSource = Contextmy.AgeRestriction.ToList();
             CmbAgeRestriction.DisplayMemberPath = "Age";
             CmbMovieStudio.ItemsSource = Contextmy.MovieStudio.ToList();

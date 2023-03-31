@@ -34,27 +34,27 @@
             <Button x:Name="btnForCinema"
                     Content="Кинотеатры"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForCinema_Click"/>
             <Button x:Name="btnForEmployee"
                     Content="Сотрудники"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForEmployee_Click"/>
             <Button x:Name="btnForProduct"
                     Content="Продукты"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForProduct_Click"/>
             <Button x:Name="btnForSession"
                     Content="Сеансы"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForSession_Click"/>
             <Button x:Name="btnForTIcket"
                     Content="Билеты"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForTIcket_Click"/>
             <Button x:Name="btnForUser"
                     Content="Покупатели"
                     Margin="5"
-                    Style="{StaticResource btnStyle}"/>
+                    Style="{StaticResource btnStyle}" Click="btnForUser_Click"/>
         </WrapPanel>
         <Frame x:Name="frameMenu"
                NavigationUIVisibility="Hidden"

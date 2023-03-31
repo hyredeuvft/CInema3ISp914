@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Cinema.ClassHelper;
+using Cinema.DB;
+using static Cinema.ClassHelper.EFClass;
+using static Cinema.ClassHelper.NavigateClass;
+
 namespace Cinema.Pages
 {
     /// <summary>
@@ -20,9 +25,64 @@ namespace Cinema.Pages
     /// </summary>
     public partial class AddEditCashReceiptPage : Page
     {
+        private bool isEdit = false;
+        private CashReceipt editCashReceipt;
+
         public AddEditCashReceiptPage()
         {
             InitializeComponent();
+
+            CmbUser.ItemsSource = Contextmy.User.ToList();
+            CmbUser.DisplayMemberPath = "LastName";
+            CmbUser.SelectedIndex = 0;
+
+            CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
+            CmbEmployee.DisplayMemberPath = "LastName";
+            CmbEmployee.SelectedIndex = 0;
+        }
+
+        public AddEditCashReceiptPage(CashReceipt cashReceipt)
+        {
+            InitializeComponent();
+
+            CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
+            CmbEmployee.DisplayMemberPath = "LastName";
+            CmbUser.ItemsSource = Contextmy.User.ToList();
+            CmbUser.DisplayMemberPath = "LastName";
+
+            CmbEmployee.SelectedItem = Contextmy.Employee.Where(i => i.IdEmployee == cashReceipt.IdEmployee).FirstOrDefault();
+            CmbUser.SelectedItem = Contextmy.User.Where(i => i.IdUser == cashReceipt.IdUser).FirstOrDefault();
+            TbDate.Text = Convert.ToString(cashReceipt.DateSale);
+            TbCost.Text = Convert.ToString(cashReceipt.FullCost);
+
+            isEdit = true;
+            editCashReceipt = cashReceipt;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (isEdit)
+            {
+                editCashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
+                editCashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+                editCashReceipt.DateSale = TbDate.SelectedDate.Value;
+                editCashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
+
+                Contextmy.SaveChanges();
+            }
+            else
+            {
+                CashReceipt cashReceipt = new CashReceipt();
+                cashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
+                cashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+                cashReceipt.DateSale = TbDate.SelectedDate.Value;
+                cashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
+
+                Contextmy.CashReceipt.Add(cashReceipt);
+                Contextmy.SaveChanges();
+            }
+
+            frame.Navigate(new InfoCashReceiptPage());
         }
     }
 }

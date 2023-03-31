@@ -5,10 +5,108 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cinema.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1500"
       Title="AddEditSessionPage">
 
-    <Grid>
-        
+    <Grid Margin="0,0,-222,-171">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="482"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="White" Offset="0.05"/>
+                <GradientStop Color="#FF4C00" Offset="0.25"/>
+                <GradientStop Color="#220A6E" Offset="0.85"/>
+                <GradientStop Color="#250672" Offset="1.1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Добавление/изменение фильма"
+                   FontSize="25"
+                   FontWeight="ExtraBold" Height="34" Width="420" Grid.ColumnSpan="2" Margin="523,0,0,0"/>
+        <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+            Grid.Column="0"
+                    Grid.Row="1" Margin="351,0,0,0">
+            <TextBlock Text="Введите дату начала"
+                       FontSize="18"
+                       Foreground="AliceBlue"
+                       FontWeight="DemiBold"
+                       HorizontalAlignment="Left"
+                       Margin="0 15 0 0"
+                       />
+            <DatePicker   x:Name="TbDateStart"
+                          Height="26"
+                          Width="241"
+                          SelectedDateFormat="Long"
+                       Margin="0 15 0 0"
+                       />
+            <TextBlock Text="Выберите зал"
+                       FontSize="18"
+                       Foreground="AliceBlue"
+                       FontWeight="DemiBold"
+                       Margin="0 15 0 0"
+                       HorizontalAlignment="Left"                
+                       />
+            <ComboBox   x:Name="CmbHall"
+                    Width="240"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                        Margin="0 15 0 0"
+                       />
+        </StackPanel>
+
+        <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Grid.Row="1" Margin="801,0,0,0" Grid.ColumnSpan="2">
+            <TextBlock Text="Выберите фильм"
+                   FontSize="18"
+                   Foreground="AliceBlue"
+                   FontWeight="DemiBold"
+                   HorizontalAlignment="Left"
+                   Margin="0 15 0 0" 
+                       />
+            <ComboBox   x:Name="CmbFilm"                     
+                    HorizontalAlignment="Left"
+                    Margin="0 15 0 0"                       
+                    Width="240"
+                    Height="40"
+                       />
+            <TextBlock Text="Введите цену"
+                   FontSize="18"
+                   Foreground="AliceBlue"
+                   FontWeight="DemiBold"
+                   HorizontalAlignment="Left"
+                   Margin="0 15 0 0"
+                       />
+            <TextBox   x:Name="TbPrice"
+                   Style="{StaticResource ResourceKey=tbStyle}"
+                   Margin="0 15 0 0"
+                   HorizontalAlignment="Left"
+                       />
+
+        </StackPanel>
+
+        <Button x:Name="btnSave"
+                Style="{StaticResource btnStyle}"
+                Content="Сохранить"
+                Grid.Row="2"
+                FontSize="20"
+                VerticalAlignment="Top" 
+                Height="49" Margin="673,16,0,0" 
+                Width="120" HorizontalAlignment="Left" Click="btnSave_Click"
+            />
     </Grid>
 </Page>
