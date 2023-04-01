@@ -218,11 +218,14 @@
     <Compile Include="Pages\InfoUserPage.xaml.cs">
       <DependentUpon>InfoUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\BuyWindow.xaml.cs">
-      <DependentUpon>BuyWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\InfoFilmWindow.xaml.cs">
       <DependentUpon>InfoFilmWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\InfoProductWindow.xaml.cs">
+      <DependentUpon>InfoProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainProductWindow.xaml.cs">
+      <DependentUpon>MainProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\NavigateWindow.xaml.cs">
       <DependentUpon>NavigateWindow.xaml</DependentUpon>
@@ -298,11 +301,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\BuyWindow.xaml">
+    <Page Include="Windows\InfoFilmWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\InfoFilmWindow.xaml">
+    <Page Include="Windows\InfoProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

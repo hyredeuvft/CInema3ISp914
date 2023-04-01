@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+using Cinema.ClassHelper;
+using Cinema.DB;
+using Cinema.Windows;
+using static Cinema.ClassHelper.EFClass;
+
+namespace Cinema.Windows
+{
+    /// <summary>
+    /// Логика взаимодействия для MainProductWindow.xaml
+    /// </summary>
+    public partial class MainProductWindow : Window
+    {
+        List<Product> products = new List<Product>();
+        List<string> sortList = new List<string>()
+        {
+            "По умолчанию",
+            "По названию",
+            "По цене"
+        };
+        public MainProductWindow()
+        {
+            InitializeComponent();
+
+            CmbSort.ItemsSource = sortList;
+            CmbSort.SelectedIndex = 0;
+
+            GetListProduct();
+            GetProduct();
+        }
+
+        private void GetListProduct()
+        {
+            products = Contextmy.Product.ToList();
+
+            switch (CmbSort.SelectedIndex)
+            {
+                case 0:
+                    products = products.OrderBy(i => i.IdProduct).ToList();
+                    break;
+                case 1:
+                    products = products.OrderBy(i => i.ProductTitle).ToList();
+                    break;
+                case 2:
+                    products = products.OrderBy(i => i.Cost).ToList();
+                    break;
+                default:
+                    break;
+            }
+            LvFilmList.ItemsSource = products;
+        }
+
+        private void GetProduct()
+        {
+            List<Product> products = new List<Product>();
+            products = Contextmy.Product.ToList();
+            LvFilmList.ItemsSource=products;
+        }
+
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (LvFilmList.SelectedItem is Product)
+            {
+                Product product = LvFilmList.SelectedItem as Product;
+                InfoProductWindow infoProductWindow = new InfoProductWindow(product);
+                infoProductWindow.Show();
+                this.Close();
+            }
+        }
+
+        private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            GetListProduct();
+        }
+
+        private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetListProduct();
+        }
+
+        private void BtnFilm_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+    }
+}

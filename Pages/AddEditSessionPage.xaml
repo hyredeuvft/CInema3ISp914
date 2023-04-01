@@ -63,7 +63,8 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                        Margin="0 15 0 0"
+                    FontSize="16"
+                    Margin="0 15 0 0"
                        />
         </StackPanel>
 
@@ -83,6 +84,7 @@
                     Margin="0 15 0 0"                       
                     Width="240"
                     Height="40"
+                    FontSize="16"
                        />
             <TextBlock Text="Введите цену"
                    FontSize="18"

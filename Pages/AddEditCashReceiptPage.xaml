@@ -76,6 +76,7 @@
             <ComboBox   x:Name="CmbUser"
                     Width="240"
                     Height="40"
+                    FontSize="16"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
@@ -93,6 +94,7 @@
                     Margin="0 15 0 0"                       
                     Width="240"
                     Height="40"
+                    FontSize="16"
                        />
 
         </StackPanel>

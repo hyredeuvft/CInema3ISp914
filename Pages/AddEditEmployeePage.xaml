@@ -95,7 +95,8 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                        Margin="0 15 0 0"
+                    FontSize="16"
+                    Margin="0 15 0 0"
                        />
         </StackPanel>
 
@@ -140,7 +141,8 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                        Margin="0 15 0 0"
+                    FontSize="16"
+                    Margin="0 15 0 0"
                        />
             <TextBlock Text="Введите логин"
                    FontSize="18"

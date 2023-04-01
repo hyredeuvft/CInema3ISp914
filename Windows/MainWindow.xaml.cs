@@ -99,5 +99,12 @@ namespace Cinema
         {
             GetListFilm();
         }
+
+        private void BtnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            MainProductWindow productWindow = new MainProductWindow();
+            productWindow.Show();
+            this.Close();
+        }
     }
 }

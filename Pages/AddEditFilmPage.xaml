@@ -112,7 +112,8 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                        Margin="0 15 0 0"
+                    FontSize="16"
+                    Margin="0 15 0 0"
                        />
             <TextBlock Text="Введите рейтинг фильма"
                    FontSize="18"
@@ -139,6 +140,7 @@
                     Margin="0 15 0 0"                       
                     Width="240"
                     Height="40"
+                    FontSize="16"
                        />
             <TextBlock Text="Введите бюджет фильма"
                    FontSize="18"
@@ -166,6 +168,7 @@
                     Margin="0 15 0 0"
                     Width="240"
                     Height="40"
+                    FontSize="16"
                        />
 
         </StackPanel>

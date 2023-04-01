@@ -112,7 +112,8 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Left"
-                        Margin="0 15 0 0"
+                    FontSize="16"
+                    Margin="0 15 0 0"
                        />
             <TextBlock Text="Введите номер телефона"
                    FontSize="18"

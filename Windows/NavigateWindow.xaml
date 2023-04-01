@@ -25,7 +25,7 @@
                    Margin="100 0 100 0">
             <Button x:Name="btnForFilm"
                     Content="Фильмы"
-                    Margin="5"
+                    Margin="5"                   
                     Style="{StaticResource btnStyle}" Click="btnForFilm_Click"/>
             <Button x:Name="btnForCashReceipt"
                     Content="Чеки"

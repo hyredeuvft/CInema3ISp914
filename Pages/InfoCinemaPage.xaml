@@ -59,16 +59,14 @@
             <Button x:Name="btnAdd"
                     Content="Добавить кинотеатр"
                     Style="{StaticResource btnStyle}"
-                    Margin="10"
-                    Width="172" Click ="btnAdd_Click"/>
+                    Width="185" Click ="btnAdd_Click"/>
             <Button x:Name="btnEdit"
                     Content="Изменить кинотеатр"
-                    Margin="10"
                     Style="{StaticResource btnStyle}" 
-                    Width="172" Click ="btnEdit_Click"/>
+                    Margin="5"
+                    Width="184" Click ="btnEdit_Click"/>
             <Button x:Name="btnDelete"
                     Content="Удалить кинотеатр"
-                    Margin="10"
                     Style="{StaticResource btnStyle}" 
                     Width="172" Click ="btnDelete_Click"/>
         </WrapPanel>

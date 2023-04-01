@@ -1,11 +1,11 @@
-﻿<Window x:Class="Cinema.Windows.InfoFilmWindow"
+﻿<Window x:Class="Cinema.Windows.InfoProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cinema.Windows"
         mc:Ignorable="d"
-        Title="InfoFilmWindow" 
+        Title="InfoProductWindow" 
         Height="900" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -38,16 +38,16 @@
             <TextBlock     FontSize="18"
                            FontWeight="Light"
                            Margin="10 0 0 0"
-                           x:Name="TbRating"/>
+                           x:Name="TbCost"/>
             <TextBlock 
                            FontSize="18"
                            FontWeight="Light"
-                           x:Name="TbDuration"
+                           x:Name="TbVolume"
                            Margin="10 0 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <TextBlock x:Name="TbTitle20"
+            <TextBlock x:Name="TbTitle2"
                            FontSize="22"
                            FontWeight="Bold"
                            Margin="5 0 0 0"
@@ -57,25 +57,21 @@
             <TextBlock     FontSize="18"
                            FontWeight="Light"
                            Margin="10 0 0 0"
-                           x:Name="TbRating20"/>
+                           x:Name="TbCost2"/>
+            <TextBlock     FontSize="18"
+                           FontWeight="Light"
+                           x:Name="TbVolume2"/>
             <TextBlock     FontSize="18"
                            FontWeight="Light"
                            Margin="10 0 0 0"
-                           x:Name="TbDescription" Height="84" Width="809"/>
-            <TextBlock     FontSize="18"
-                           FontWeight="Light"
-                           x:Name="TbDirector"/>
+                           x:Name="TbCount"/>
             <TextBlock     FontSize="18"
                            FontWeight="Light"
                            Margin="10 0 0 0"
-                           x:Name="TbPremierDate"/>
-            
+                           x:Name="TbCategory"/>
+
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="0,295,0,0">
-            <TextBlock Text="Сеансы:"
-                       FontSize="22"
-                       FontWeight="Light"
-                       Margin="10 0 0 0"/>
             <TextBlock 
                 x:Name="TbSession1"
                        FontSize="18"

@@ -1,11 +1,11 @@
-﻿<Window x:Class="Cinema.MainWindow"
+﻿<Window x:Class="Cinema.Windows.MainProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cinema"
+        xmlns:local="clr-namespace:Cinema.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="MainProductWindow" 
         Height="800" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#8C6DD7">
@@ -16,7 +16,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Список фильмов"
+        <TextBlock Text="Список продуктов"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="36"
@@ -43,16 +43,15 @@
                       Height="35"
                       FontSize="18"
                       SelectionChanged ="CmbSort_SelectionChanged" />
-            <Button x:Name="BtnProduct"
+            <Button x:Name="BtnFilm"
                     Width="200"
                     Height="35"
                     Margin="265 0 0 0"
-                    Content="Продукция"
+                    Content="Фильмы"
                     FontSize="22"
                     Style="{StaticResource btnStyle}"
-                    Click="BtnProduct_Click"
+                    Click ="BtnFilm_Click"
                     />
-
         </WrapPanel>
 
         <ListView x:Name="LvFilmList" 
@@ -80,13 +79,13 @@
                             <Image Height="239"
                                    Width="198">
                             </Image>
-                            <TextBlock Text="{Binding MovieTitle}"
+                            <TextBlock Text="{Binding ProductTitle}"
                                        FontSize="18"
                                        FontWeight="Bold"
                                        Margin="5 0 0 0"
                                        TextWrapping="Wrap"/>
 
-                            <TextBlock Text="{Binding Rating}"
+                            <TextBlock Text="{Binding COst}"
                                        FontSize="18"
                                        FontWeight="Light"
                                        Margin="10 0 0 0"/>
