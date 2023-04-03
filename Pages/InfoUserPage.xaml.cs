@@ -36,37 +36,54 @@ namespace Cinema.Pages
         };
         public InfoUserPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListUser();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListUser();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListUser()
         {
-
-            users = Contextmy.User.ToList();
-            users = users.Where(i => i.LastName.Contains(TxbSearch.Text)
-            || i.FirstName.Contains(TxbSearch.Text)
-            || Convert.ToString(i.Birthday).Contains(TxbSearch.Text)).ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    users = users.OrderBy(i => i.IdUser).ToList();
-                    break;
-                case 1:
-                    users = users.OrderBy(i => i.LastName).ToList();
-                    break;
-                case 2:
-                    users = users.OrderBy(i => i.FirstName).ToList();
-                    break;
-                case 3:
-                    users = users.OrderBy(i => i.Birthday).ToList();
-                    break;
-                default:
-                    break;
+                users = Contextmy.User.ToList();
+                users = users.Where(i => i.LastName.Contains(TxbSearch.Text)
+                || i.FirstName.Contains(TxbSearch.Text)
+                || Convert.ToString(i.Birthday).Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        users = users.OrderBy(i => i.IdUser).ToList();
+                        break;
+                    case 1:
+                        users = users.OrderBy(i => i.LastName).ToList();
+                        break;
+                    case 2:
+                        users = users.OrderBy(i => i.FirstName).ToList();
+                        break;
+                    case 3:
+                        users = users.OrderBy(i => i.Birthday).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = users;
             }
-            Dg.ItemsSource = users;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {

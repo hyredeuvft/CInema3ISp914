@@ -37,31 +37,50 @@ namespace Cinema.Pages
         };
         public InfoCashReceiptPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListCashReceipt();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListCashReceipt();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListCashReceipt()
         {
-
-            cashReceipt = Contextmy.CashReceipt.ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    cashReceipt = cashReceipt.OrderBy(i => i.IdCashReceipt).ToList();
-                    break;
-                case 1:
-                    cashReceipt = cashReceipt.OrderBy(i => i.DateSale).ToList();
-                    break;
-                case 2:
-                    cashReceipt = cashReceipt.OrderBy(i => i.FullCost).ToList();
-                    break;
-                default:
-                    break;
+                cashReceipt = Contextmy.CashReceipt.ToList();
+                cashReceipt = cashReceipt.Where(i => i.DateSale.Date.ToString().Contains(TxbSearch.Text)
+                || i.FullCost.ToString().Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        cashReceipt = cashReceipt.OrderBy(i => i.IdCashReceipt).ToList();
+                        break;
+                    case 1:
+                        cashReceipt = cashReceipt.OrderBy(i => i.DateSale).ToList();
+                        break;
+                    case 2:
+                        cashReceipt = cashReceipt.OrderBy(i => i.FullCost).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = cashReceipt;
             }
-            Dg.ItemsSource = cashReceipt;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)

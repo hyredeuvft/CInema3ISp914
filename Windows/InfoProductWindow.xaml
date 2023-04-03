@@ -24,9 +24,19 @@
         <TextBlock x:Name="TbId" Margin="112,414,91,328"
             />
         <StackPanel Grid.Column="0">
-            <Image Height="318"
+            <Image     x:Name="ProductPhoto"
+                       Height="318"
                        Width="198">
             </Image>
+            <Button x:Name="ChangeImage"
+                    Style="{StaticResource btnStyle}"
+                    Content="Выбрать фото"
+                    Height="50"
+                    Width="200"
+                    FontSize="24"
+                    Margin="0 15 0 25"
+                    Click="ChangeImage_Click"
+                />
             <TextBlock x:Name="TbTitle"
                            FontSize="22"
                            FontWeight="Bold"

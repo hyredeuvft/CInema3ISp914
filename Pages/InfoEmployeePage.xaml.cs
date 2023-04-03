@@ -35,36 +35,54 @@ namespace Cinema.Pages
         };
         public InfoEmployeePage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListEmployee();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListEmployee();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
         private void GetListEmployee()
         {
-
-            employee = Contextmy.Employee.ToList();
-            employee = employee.Where(i => i.LastName.Contains(TxbSearch.Text)
-            || i.FirstName.Contains(TxbSearch.Text)
-            || Convert.ToString(i.Birthday).Contains(TxbSearch.Text)).ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    employee = employee.OrderBy(i => i.IdEmployee).ToList();
-                    break;
-                case 1:
-                    employee = employee.OrderBy(i => i.LastName).ToList();
-                    break;
-                case 2:
-                    employee = employee.OrderBy(i => i.FirstName).ToList();
-                    break;
-                case 3:
-                    employee = employee.OrderBy(i => i.Birthday).ToList();
-                    break;
-                default:
-                    break;
+                employee = Contextmy.Employee.ToList();
+                employee = employee.Where(i => i.LastName.Contains(TxbSearch.Text)
+                || i.FirstName.Contains(TxbSearch.Text)
+                || Convert.ToString(i.Birthday).Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        employee = employee.OrderBy(i => i.IdEmployee).ToList();
+                        break;
+                    case 1:
+                        employee = employee.OrderBy(i => i.LastName).ToList();
+                        break;
+                    case 2:
+                        employee = employee.OrderBy(i => i.FirstName).ToList();
+                        break;
+                    case 3:
+                        employee = employee.OrderBy(i => i.Birthday).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = employee;
+
             }
-            Dg.ItemsSource = employee;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)

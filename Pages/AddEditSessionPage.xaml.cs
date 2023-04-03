@@ -43,43 +43,62 @@ namespace Cinema.Pages
 
         public AddEditSessionPage(SessionFilm sessionFilm)
         {
-            InitializeComponent();
-            CmbHall.ItemsSource = Contextmy.MovieHall.ToList();
-            CmbHall.DisplayMemberPath = "TypeHall";
-            CmbFilm.ItemsSource = Contextmy.Film.ToList();
-            CmbFilm.DisplayMemberPath = "MovieTitle";
+            try
+            {
+                InitializeComponent();
+                CmbHall.ItemsSource = Contextmy.MovieHall.ToList();
+                CmbHall.DisplayMemberPath = "TypeHall";
+                CmbFilm.ItemsSource = Contextmy.Film.ToList();
+                CmbFilm.DisplayMemberPath = "MovieTitle";
 
-            TbDateStart.Text = Convert.ToString(sessionFilm.DateTimeStart);
-            TbPrice.Text = Convert.ToString(sessionFilm.Price);
-            CmbHall.SelectedItem = Contextmy.MovieHall.Where(i => i.IdMovieHall == sessionFilm.IdMovieHall).FirstOrDefault();
-            CmbFilm.SelectedItem = Contextmy.Film.Where(i => i.IdFilm == sessionFilm.IdFilm).FirstOrDefault();
+                TbDateStart.Text = Convert.ToString(sessionFilm.DateTimeStart);
+                TbPrice.Text = Convert.ToString(sessionFilm.Price);
+                CmbHall.SelectedItem = Contextmy.MovieHall.Where(i => i.IdMovieHall == sessionFilm.IdMovieHall).FirstOrDefault();
+                CmbFilm.SelectedItem = Contextmy.Film.Where(i => i.IdFilm == sessionFilm.IdFilm).FirstOrDefault();
 
-            isEdit = true;
-            editSession = sessionFilm;
+                isEdit = true;
+                editSession = sessionFilm;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (isEdit)
+            try
             {
-                editSession.DateTimeStart = Convert.ToDateTime(TbDateStart.Text);
-                editSession.Price = Convert.ToDecimal(TbPrice.Text);
-                editSession.IdMovieHall =(CmbHall.SelectedItem as MovieHall).IdMovieHall;
-                editSession.IdFilm = (CmbFilm.SelectedItem as Film).IdFilm;
+                if (isEdit)
+                {
+                    editSession.DateTimeStart = Convert.ToDateTime(TbDateStart.Text);
+                    editSession.Price = Convert.ToDecimal(TbPrice.Text);
+                    editSession.IdMovieHall = (CmbHall.SelectedItem as MovieHall).IdMovieHall;
+                    editSession.IdFilm = (CmbFilm.SelectedItem as Film).IdFilm;
 
-                Contextmy.SaveChanges();
+                    Contextmy.SaveChanges();
+                }
+                else
+                {
+                    SessionFilm sessionFilm = new SessionFilm();
+                    sessionFilm.DateTimeStart = Convert.ToDateTime(TbDateStart.Text);
+                    sessionFilm.Price = Convert.ToDecimal(TbPrice.Text);
+                    sessionFilm.IdMovieHall = (CmbHall.SelectedItem as MovieHall).IdMovieHall;
+                    sessionFilm.IdFilm = (CmbFilm.SelectedItem as Film).IdFilm;
+
+                    Contextmy.SessionFilm.Add(sessionFilm);
+                    Contextmy.SaveChanges();
+                }
+
             }
-            else
+            catch (Exception)
             {
-                SessionFilm sessionFilm = new SessionFilm();
-                sessionFilm.DateTimeStart = Convert.ToDateTime(TbDateStart.Text);
-                sessionFilm.Price = Convert.ToDecimal(TbPrice.Text);
-                sessionFilm.IdMovieHall = (CmbHall.SelectedItem as MovieHall).IdMovieHall;
-                sessionFilm.IdFilm = (CmbFilm.SelectedItem as Film).IdFilm;
-
-                Contextmy.SessionFilm.Add(sessionFilm);
-                Contextmy.SaveChanges();
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
+            
             frame.Navigate(new InfoSessionPage());
         }
     }

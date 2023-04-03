@@ -34,31 +34,50 @@ namespace Cinema.Pages
         };
         public InfoSessionPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListSession();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListSession();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListSession()
         {
-
-            sessionFilms = Contextmy.SessionFilm.ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    sessionFilms = sessionFilms.OrderBy(i => i.IdSessionFilm).ToList();
-                    break;
-                case 1:
-                    sessionFilms = sessionFilms.OrderBy(i => i.DateTimeStart).ToList();
-                    break;
-                case 2:
-                    sessionFilms = sessionFilms.OrderBy(i => i.Price).ToList();
-                    break;
-                default:
-                    break;
+                sessionFilms = Contextmy.SessionFilm.ToList();
+                sessionFilms = sessionFilms.Where(i => i.DateTimeStart.Date.ToString().Contains(TxbSearch.Text)
+                || i.Price.ToString().Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        sessionFilms = sessionFilms.OrderBy(i => i.IdSessionFilm).ToList();
+                        break;
+                    case 1:
+                        sessionFilms = sessionFilms.OrderBy(i => i.DateTimeStart).ToList();
+                        break;
+                    case 2:
+                        sessionFilms = sessionFilms.OrderBy(i => i.Price).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = sessionFilms;
             }
-            Dg.ItemsSource = sessionFilms;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {

@@ -37,37 +37,54 @@ namespace Cinema.Pages
 
         public InfoFilmPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListFilm();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListFilm();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListFilm()
         {
-
-            films = Contextmy.Film.ToList();
-            films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
-            || i.Description.Contains(TxbSearch.Text)
-            || i.Director.Contains(TxbSearch.Text)).ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    films = films.OrderBy(i => i.IdFilm).ToList();
-                    break;
-                case 1:
-                    films = films.OrderBy(i => i.MovieTitle).ToList();
-                    break;
-                case 2:
-                    films = films.OrderBy(i => i.Rating).ToList();
-                    break;
-                case 3:
-                    films = films.OrderBy(i => i.PremierDate).ToList();
-                    break;
-                default: 
-                    break;
+                films = Contextmy.Film.ToList();
+                films = films.Where(i => i.MovieTitle.Contains(TxbSearch.Text)
+                || i.Description.Contains(TxbSearch.Text)
+                || i.Director.Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        films = films.OrderBy(i => i.IdFilm).ToList();
+                        break;
+                    case 1:
+                        films = films.OrderBy(i => i.MovieTitle).ToList();
+                        break;
+                    case 2:
+                        films = films.OrderBy(i => i.Rating).ToList();
+                        break;
+                    case 3:
+                        films = films.OrderBy(i => i.PremierDate).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = films;
             }
-            Dg.ItemsSource = films;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

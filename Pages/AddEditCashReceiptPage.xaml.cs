@@ -43,43 +43,69 @@ namespace Cinema.Pages
 
         public AddEditCashReceiptPage(CashReceipt cashReceipt)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
+                CmbEmployee.DisplayMemberPath = "LastName";
+                CmbUser.ItemsSource = Contextmy.User.ToList();
+                CmbUser.DisplayMemberPath = "LastName";
 
-            CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
-            CmbEmployee.DisplayMemberPath = "LastName";
-            CmbUser.ItemsSource = Contextmy.User.ToList();
-            CmbUser.DisplayMemberPath = "LastName";
+                CmbEmployee.SelectedItem = Contextmy.Employee.Where(i => i.IdEmployee == cashReceipt.IdEmployee).FirstOrDefault();
+                CmbUser.SelectedItem = Contextmy.User.Where(i => i.IdUser == cashReceipt.IdUser).FirstOrDefault();
+                TbDate.Text = Convert.ToString(cashReceipt.DateSale);
+                TbCost.Text = Convert.ToString(cashReceipt.FullCost);
 
-            CmbEmployee.SelectedItem = Contextmy.Employee.Where(i => i.IdEmployee == cashReceipt.IdEmployee).FirstOrDefault();
-            CmbUser.SelectedItem = Contextmy.User.Where(i => i.IdUser == cashReceipt.IdUser).FirstOrDefault();
-            TbDate.Text = Convert.ToString(cashReceipt.DateSale);
-            TbCost.Text = Convert.ToString(cashReceipt.FullCost);
-
-            isEdit = true;
-            editCashReceipt = cashReceipt;
+                isEdit = true;
+                editCashReceipt = cashReceipt;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (isEdit)
             {
-                editCashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
-                editCashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
-                editCashReceipt.DateSale = TbDate.SelectedDate.Value;
-                editCashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
+                try
+                {
+                    editCashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
+                    editCashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+                    editCashReceipt.DateSale = TbDate.SelectedDate.Value;
+                    editCashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
 
-                Contextmy.SaveChanges();
+                    Contextmy.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw;
+                }
+                
             }
             else
             {
-                CashReceipt cashReceipt = new CashReceipt();
-                cashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
-                cashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
-                cashReceipt.DateSale = TbDate.SelectedDate.Value;
-                cashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
+                try
+                {
+                    CashReceipt cashReceipt = new CashReceipt();
+                    cashReceipt.IdUser = (CmbUser.SelectedItem as User).IdUser;
+                    cashReceipt.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+                    cashReceipt.DateSale = TbDate.SelectedDate.Value;
+                    cashReceipt.FullCost = Convert.ToDecimal(TbCost.Text);
 
-                Contextmy.CashReceipt.Add(cashReceipt);
-                Contextmy.SaveChanges();
+                    Contextmy.CashReceipt.Add(cashReceipt);
+                    Contextmy.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw;
+                }
+                
             }
 
             frame.Navigate(new InfoCashReceiptPage());

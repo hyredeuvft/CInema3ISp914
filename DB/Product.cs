@@ -27,6 +27,7 @@ namespace Cinema.DB
         public Nullable<decimal> Volume { get; set; }
         public Nullable<byte> Count { get; set; }
         public int IdCategory { get; set; }
+        public byte[] PhotoPath { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

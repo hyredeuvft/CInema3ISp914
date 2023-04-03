@@ -35,37 +35,54 @@ namespace Cinema.Pages
         };
         public InfoCinemaPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListCinema();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListCinema();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListCinema()
         {
-
-            cinema = Contextmy.NetCinema.ToList();
-            cinema = cinema.Where(i => i.CinemaTitle.Contains(TxbSearch.Text)
-            || i.Address.Contains(TxbSearch.Text)
-            || i.PhoneNumber.Contains(TxbSearch.Text)).ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    cinema = cinema.OrderBy(i => i.IdCinema).ToList();
-                    break;
-                case 1:
-                    cinema = cinema.OrderBy(i => i.CinemaTitle).ToList();
-                    break;
-                case 2:
-                    cinema = cinema.OrderBy(i => i.Address).ToList();
-                    break;
-                case 3:
-                    cinema = cinema.OrderBy(i => i.PhoneNumber).ToList();
-                    break;
-                default:
-                    break;
+                cinema = Contextmy.NetCinema.ToList();
+                cinema = cinema.Where(i => i.CinemaTitle.Contains(TxbSearch.Text)
+                || i.Address.Contains(TxbSearch.Text)
+                || i.PhoneNumber.Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        cinema = cinema.OrderBy(i => i.IdCinema).ToList();
+                        break;
+                    case 1:
+                        cinema = cinema.OrderBy(i => i.CinemaTitle).ToList();
+                        break;
+                    case 2:
+                        cinema = cinema.OrderBy(i => i.Address).ToList();
+                        break;
+                    case 3:
+                        cinema = cinema.OrderBy(i => i.PhoneNumber).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = cinema;
             }
-            Dg.ItemsSource = cinema;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void CmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

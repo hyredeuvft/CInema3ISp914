@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Cinema.ClassHelper;
 using Cinema.DB;
 using Cinema.Windows;
+using Microsoft.Win32;
 using static Cinema.ClassHelper.EFClass;
 
 namespace Cinema.Windows
@@ -25,6 +26,7 @@ namespace Cinema.Windows
     public partial class InfoProductWindow : Window
     {
         List<Product> products = new List<Product>();
+        private string pathPhoto = null;
         public InfoProductWindow()
         {
             InitializeComponent();
@@ -54,6 +56,18 @@ namespace Cinema.Windows
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
+        }
+
+        private void ChangeImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ProductPhoto.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                pathPhoto = openFileDialog.FileName;
+            }
         }
     }
 }

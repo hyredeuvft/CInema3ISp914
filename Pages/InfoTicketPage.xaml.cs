@@ -35,33 +35,51 @@ namespace Cinema.Pages
 
         public InfoTicketPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListTicket();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListTicket();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void GetListTicket()
         {
-
-            tickets = Contextmy.Ticket.ToList();
-            tickets = tickets.Where(i => Convert.ToString(i.Row).Contains(TxbSearch.Text)
-            || Convert.ToString(i.Place).Contains(TxbSearch.Text)).ToList();          
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    tickets = tickets.OrderBy(i => i.IdTicket).ToList();
-                    break;
-                case 1:
-                    tickets = tickets.OrderBy(i => i.Row).ToList();
-                    break;
-                case 2:
-                    tickets = tickets.OrderBy(i => i.Place).ToList();
-                    break;
-                default:
-                    break;
+                tickets = Contextmy.Ticket.ToList();
+                tickets = tickets.Where(i => Convert.ToString(i.Row).Contains(TxbSearch.Text)
+                || Convert.ToString(i.Place).Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        tickets = tickets.OrderBy(i => i.IdTicket).ToList();
+                        break;
+                    case 1:
+                        tickets = tickets.OrderBy(i => i.Row).ToList();
+                        break;
+                    case 2:
+                        tickets = tickets.OrderBy(i => i.Place).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = tickets;
             }
-            Dg.ItemsSource = tickets;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)

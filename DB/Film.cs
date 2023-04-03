@@ -34,6 +34,7 @@ namespace Cinema.DB
         public int IdMovieStudio { get; set; }
         public decimal MovieBudget { get; set; }
         public byte IdMovieDistributor { get; set; }
+        public byte[] PhotoPath { get; set; }
     
         public virtual AgeRestriction AgeRestriction { get; set; }
         public virtual MovieDistributor MovieDistributor { get; set; }

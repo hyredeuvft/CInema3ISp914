@@ -77,13 +77,22 @@
                             Background="#00C322"
                             MouseLeftButtonUp="Border_MouseLeftButtonUp" Margin="5">
                         <StackPanel>
-                            <Image Height="239"
-                                   Width="198">
+                            <Image Height="240"
+                                   Width="200">
+                                <Image.Source>
+                                    <Binding Path="PhotoPath">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>
+                                                /Res/noImage.png
+                                            </ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
                             </Image>
                             <TextBlock Text="{Binding MovieTitle}"
                                        FontSize="18"
                                        FontWeight="Bold"
-                                       Margin="5 0 0 0"
+                                       Margin="5 -10 0 0"
                                        TextWrapping="Wrap"/>
 
                             <TextBlock Text="{Binding Rating}"

@@ -39,43 +39,62 @@ namespace Cinema.Pages
 
         public AddEditNetCinemaPage(NetCinema netCinema)
         {
-            CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
-            CmbEmployee.DisplayMemberPath = "LastName";
+            try
+            {
+                InitializeComponent();
+                CmbEmployee.ItemsSource = Contextmy.Employee.ToList();
+                CmbEmployee.DisplayMemberPath = "LastName";
 
-            TbTitle.Text = netCinema.CinemaTitle;
-            TbAddress.Text = netCinema.Address;
-            TbPhone.Text = netCinema.PhoneNumber;
-            TbEmail.Text = netCinema.CinemaEmail;
-            CmbEmployee.SelectedItem = Contextmy.Employee.Where(i => i.IdEmployee == netCinema.IdEmployee).FirstOrDefault();
+                TbTitle.Text = netCinema.CinemaTitle;
+                TbAddress.Text = netCinema.Address;
+                TbPhone.Text = netCinema.PhoneNumber;
+                TbEmail.Text = netCinema.CinemaEmail;
+                CmbEmployee.SelectedItem = Contextmy.Employee.Where(i => i.IdEmployee == netCinema.IdEmployee).FirstOrDefault();
 
-            isEdit = true;
-            editCinema = netCinema;
+                isEdit = true;
+                editCinema = netCinema;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (isEdit)
+            try
             {
-                editCinema.CinemaTitle = TbTitle.Text;
-                editCinema.Address = TbAddress.Text;
-                editCinema.PhoneNumber = TbPhone.Text;
-                editCinema.CinemaEmail = TbEmail.Text;
-                editCinema.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+                if (isEdit)
+                {
+                    editCinema.CinemaTitle = TbTitle.Text;
+                    editCinema.Address = TbAddress.Text;
+                    editCinema.PhoneNumber = TbPhone.Text;
+                    editCinema.CinemaEmail = TbEmail.Text;
+                    editCinema.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
 
-                Contextmy.SaveChanges();
+                    Contextmy.SaveChanges();
+                }
+                else
+                {
+                    NetCinema netCinema = new NetCinema();
+                    netCinema.CinemaTitle = TbTitle.Text;
+                    netCinema.Address = TbAddress.Text;
+                    netCinema.PhoneNumber = TbPhone.Text;
+                    netCinema.CinemaEmail = TbEmail.Text;
+                    netCinema.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
+
+                    Contextmy.NetCinema.Add(netCinema);
+                    Contextmy.SaveChanges();
+                }
             }
-            else
+            catch (Exception)
             {
-                NetCinema netCinema = new NetCinema();
-                netCinema.CinemaTitle = TbTitle.Text;
-                netCinema.Address = TbAddress.Text;
-                netCinema.PhoneNumber = TbPhone.Text;
-                netCinema.CinemaEmail = TbEmail.Text;
-                netCinema.IdEmployee = (CmbEmployee.SelectedItem as Employee).IdEmployee;
-
-                Contextmy.NetCinema.Add(netCinema);
-                Contextmy.SaveChanges();
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
+            
             frame.Navigate(new InfoCinemaPage());
         }
     }

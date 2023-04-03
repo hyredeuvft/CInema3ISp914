@@ -34,30 +34,49 @@ namespace Cinema.Pages
         };
         public InfoProductPage()
         {
-            InitializeComponent();
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
-            GetListProduct();
+            try
+            {
+                InitializeComponent();
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+                GetListProduct();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
         private void GetListProduct()
         {
-
-            products = Contextmy.Product.ToList();
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    products = products.OrderBy(i => i.IdProduct).ToList();
-                    break;
-                case 1:
-                    products = products.OrderBy(i => i.ProductTitle).ToList();
-                    break;
-                case 2:
-                    products = products.OrderBy(i => i.Cost).ToList();
-                    break;              
-                default:
-                    break;
+                products = Contextmy.Product.ToList();
+                products = products.Where(i => i.ProductTitle.Contains(TxbSearch.Text)
+                || i.Cost.ToString().Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        products = products.OrderBy(i => i.IdProduct).ToList();
+                        break;
+                    case 1:
+                        products = products.OrderBy(i => i.ProductTitle).ToList();
+                        break;
+                    case 2:
+                        products = products.OrderBy(i => i.Cost).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                Dg.ItemsSource = products;
             }
-            Dg.ItemsSource = products;
+            catch (Exception)
+            {
+                MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void TxbSearch_TextChanged(object sender, TextChangedEventArgs e)

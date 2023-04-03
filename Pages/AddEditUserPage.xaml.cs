@@ -39,57 +39,76 @@ namespace Cinema.Pages
 
         public AddEditUserPage(User user)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            CmbTag.ItemsSource = Contextmy.Tag.ToList();
-            CmbTag.DisplayMemberPath = "TagTitle";
+                CmbTag.ItemsSource = Contextmy.Tag.ToList();
+                CmbTag.DisplayMemberPath = "TagTitle";
 
-            TbLName.Text = user.LastName;
-            TbFName.Text = user.FirstName;
-            TbP.Text = user.Patronymic;
-            TbDate.Text = Convert.ToString(user.Birthday);
-            TbEmail.Text = user.Email;
-            TbPhNumber.Text = user.PhoneNumber;
-            TbBonus.Text = Convert.ToString(user.PersonalBonus);
-            CmbTag.SelectedItem = Contextmy.Tag.Where(i => i.IdTag == user.IdTag).FirstOrDefault();
-            TbPassword.Text = Convert.ToString(user.Password);
+                TbLName.Text = user.LastName;
+                TbFName.Text = user.FirstName;
+                TbP.Text = user.Patronymic;
+                TbDate.Text = Convert.ToString(user.Birthday);
+                TbEmail.Text = user.Email;
+                TbPhNumber.Text = user.PhoneNumber;
+                TbBonus.Text = Convert.ToString(user.PersonalBonus);
+                CmbTag.SelectedItem = Contextmy.Tag.Where(i => i.IdTag == user.IdTag).FirstOrDefault();
+                TbPassword.Text = Convert.ToString(user.Password);
 
-            isEdit = true;
-            editUser = user;
+                isEdit = true;
+                editUser = user;
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (isEdit)
+            try
             {
-                editUser.LastName = TbLName.Text;
-                editUser.FirstName = TbFName.Text;
-                editUser.Patronymic = TbP.Text;
-                editUser.Birthday = TbDate.SelectedDate.Value;
-                editUser.Email = TbEmail.Text;
-                editUser.PhoneNumber = TbPhNumber.Text;
-                editUser.PersonalBonus = Convert.ToInt32(TbBonus.Text);
-                editUser.IdTag = (CmbTag.SelectedItem as Tag).IdTag;
-                editUser.Password = TbPassword.Text;
+                if (isEdit)
+                {
+                    editUser.LastName = TbLName.Text;
+                    editUser.FirstName = TbFName.Text;
+                    editUser.Patronymic = TbP.Text;
+                    editUser.Birthday = TbDate.SelectedDate.Value;
+                    editUser.Email = TbEmail.Text;
+                    editUser.PhoneNumber = TbPhNumber.Text;
+                    editUser.PersonalBonus = Convert.ToInt32(TbBonus.Text);
+                    editUser.IdTag = (CmbTag.SelectedItem as Tag).IdTag;
+                    editUser.Password = TbPassword.Text;
 
-                Contextmy.SaveChanges();
+                    Contextmy.SaveChanges();
+                }
+                else
+                {
+                    User user = new User();
+                    user.LastName = TbLName.Text;
+                    user.FirstName = TbFName.Text;
+                    user.Patronymic = TbP.Text;
+                    user.Birthday = TbDate.SelectedDate.Value;
+                    user.Email = TbEmail.Text;
+                    user.PhoneNumber = TbPhNumber.Text;
+                    user.PersonalBonus = Convert.ToInt32(TbBonus.Text);
+                    user.IdTag = (CmbTag.SelectedItem as Tag).IdTag;
+                    user.Password = TbPassword.Text;
+
+                    Contextmy.User.Add(user);
+                    Contextmy.SaveChanges();
+                }
             }
-            else
+            catch (Exception)
             {
-                User user = new User();
-                user.LastName = TbLName.Text;
-                user.FirstName = TbFName.Text;
-                user.Patronymic = TbP.Text;
-                user.Birthday = TbDate.SelectedDate.Value;
-                user.Email = TbEmail.Text;
-                user.PhoneNumber = TbPhNumber.Text;
-                user.PersonalBonus = Convert.ToInt32(TbBonus.Text);
-                user.IdTag = (CmbTag.SelectedItem as Tag).IdTag;
-                user.Password = TbPassword.Text;
-
-                Contextmy.User.Add(user);
-                Contextmy.SaveChanges();
+                MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
+            
             frame.Navigate(new InfoUserPage());
         }
     }

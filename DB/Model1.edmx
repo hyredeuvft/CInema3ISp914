@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Cinema3ISP9_14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Cinema3ISP9_14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgeRestriction">
           <Key>
             <PropertyRef Name="IdAgeRestriction" />
@@ -92,6 +92,7 @@
           <Property Name="IdMovieStudio" Type="int" Nullable="false" />
           <Property Name="MovieBudget" Type="decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="IdMovieDistributor" Type="tinyint" Nullable="false" />
+          <Property Name="PhotoPath" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="FilmCreatorCountry">
           <Key>
@@ -166,12 +167,13 @@
           <Key>
             <PropertyRef Name="IdProduct" />
           </Key>
-          <Property Name="IdProduct" Type="int" Nullable="false" />
+          <Property Name="IdProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cost" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="Volume" Type="decimal" Precision="3" Scale="2" />
           <Property Name="Count" Type="tinyint" />
           <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="PhotoPath" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ProductCashReceipt">
           <Key>
@@ -949,8 +951,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Cinema3ISP9_14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1045,6 +1046,7 @@
           <NavigationProperty Name="NetCinema" Relationship="Self.CinemaFilm" FromRole="Film" ToRole="NetCinema" />
           <NavigationProperty Name="CreatorCountry" Relationship="Self.FilmCreatorCountry" FromRole="Film" ToRole="CreatorCountry" />
           <NavigationProperty Name="Genre" Relationship="Self.FilmGenre" FromRole="Film" ToRole="Genre" />
+          <Property Name="PhotoPath" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -1122,6 +1124,7 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ProductCashReceipt" Relationship="Self.FK_ProductCashReceipt_Product" FromRole="Product" ToRole="ProductCashReceipt" />
           <NavigationProperty Name="Provider" Relationship="Self.ProductProvider" FromRole="Product" ToRole="Provider" />
+          <Property Name="PhotoPath" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ProductCashReceipt">
           <Key>
@@ -1622,17 +1625,17 @@
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <FunctionImport Name="PR_AddFinalTime">
-            <Parameter Name="IdFilm" Mode="In" Type="Int32" />
+          <Parameter Name="IdFilm" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_AddFinalTimeStart">
-            <Parameter Name="IdFilm" Mode="In" Type="Int32" />
+          <Parameter Name="IdFilm" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_ListFilm" ReturnType="Collection(Cinema3ISP9_14Model.PR_ListFilm_Result)">
             <Parameter Name="DateStart" Mode="In" Type="String" />
             <Parameter Name="DateEnd" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PR_MinusCountProduct">
-            <Parameter Name="IdProd" Mode="In" Type="Int32" />
+          <Parameter Name="IdProd" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PR_RecordOnFilm">
             <Parameter Name="FilmTitle" Mode="In" Type="String" />
@@ -1769,6 +1772,7 @@
           <EntitySetMapping Name="Film">
             <EntityTypeMapping TypeName="Cinema3ISP9_14Model.Film">
               <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
                 <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
                 <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1845,6 +1849,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="Cinema3ISP9_14Model.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
