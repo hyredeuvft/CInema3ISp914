@@ -57,7 +57,6 @@ namespace Cinema.Pages
             catch (Exception)
             {
                 MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
             }
             
         }
@@ -90,7 +89,6 @@ namespace Cinema.Pages
             catch (Exception)
             {
                 MessageBox.Show("Проверьте правильность заполнения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
             }
             
             frame.Navigate(new InfoTicketPage());

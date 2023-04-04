@@ -17,7 +17,8 @@ using Cinema.ClassHelper;
 using Cinema.DB;
 using Cinema.Windows;
 using static Cinema.ClassHelper.EFClass;
-
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Cinema.Windows
 {
@@ -40,32 +41,56 @@ namespace Cinema.Windows
 
         private void GetInfo(Film film)
         {
-            TbTitle.Text = film.MovieTitle;
-            TbRating.Text = Convert.ToString(film.Rating);
-            TbRating20.Text = Convert.ToString(film.Rating);
-            TbDuration.Text = Convert.ToString(film.DurationInMinute);
-            TbTitle20.Text = film.MovieTitle;
-            if (film.Description == "")
+            try
             {
-                TbDescription.Text = "Описание отсутствует";
+                if (film.PhotoPath != null)
+                {
+                    using (MemoryStream stream = new MemoryStream(film.PhotoPath))
+                    {
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        bitmapImage.StreamSource = stream;
+                        bitmapImage.EndInit();
+                        FilmPhoto.Source = bitmapImage;
+                    }
+                }
+                else
+                {
+                    FilmPhoto.Source = new BitmapImage(new Uri(@"/Res/noImage.png", UriKind.Relative));
+                }
+                TbTitle.Text = film.MovieTitle;
+                TbRating.Text = Convert.ToString(film.Rating);
+                TbRating20.Text = Convert.ToString(film.Rating);
+                TbDuration.Text = Convert.ToString(film.DurationInMinute);
+                TbTitle20.Text = film.MovieTitle;
+                if (film.Description == "")
+                {
+                    TbDescription.Text = "Описание отсутствует";
+                }
+                else
+                {
+                    TbDescription.Text = film.Description;
+                }
+                TbDirector.Text = film.Director;
+                TbPremierDate.Text = Convert.ToString(film.PremierDate);
+                var Id1 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
+                if (Id1 != null)
+                {
+                    TbSession1.Text = Convert.ToString(Id1.DateTimeStart);
+                }
+                else
+                {
+                    TbSession1.Text = "Отсутствуют";
+                }
+                
             }
-            else
+            catch (Exception)
             {
-                TbDescription.Text = film.Description;
+                MessageBox.Show("Не удалось вывести информацию о фильме", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            TbDirector.Text = film.Director;
-            TbPremierDate.Text = Convert.ToString(film.PremierDate);
-            var Id1 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
-            var Id2 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
-            var Id3 = Contextmy.SessionFilm.ToList().Where(i => i.IdFilm == film.IdFilm).FirstOrDefault();
-            if (Id1 != null)
-            {
-                TbSession1.Text = Convert.ToString(Id1.DateTimeStart);
-            }
-            else
-            {
-                TbSession1.Text = "Отсутствуют";
-            }
+            
             
         }
 

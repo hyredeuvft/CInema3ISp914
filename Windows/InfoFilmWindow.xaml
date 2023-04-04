@@ -24,8 +24,19 @@
         <TextBlock x:Name="TbId" Margin="112,414,91,328"
             />
         <StackPanel Grid.Column="0">
-            <Image Height="318"
-                       Width="198">
+            <Image     x:Name="FilmPhoto"
+                       Height="285"
+                       Width="198"
+                       Margin="0 25 0 20">
+                <Image.Source>
+                    <Binding Path="PhotoPath">
+                        <Binding.TargetNullValue>
+                            <ImageSource>
+                                /Res/noImage.png
+                            </ImageSource>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </Image.Source>
             </Image>
             <TextBlock x:Name="TbTitle"
                            FontSize="22"

@@ -21,17 +21,26 @@ namespace Cinema.Windows
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        int id;
         public AuthorizationWindow()
         {
-            InitializeComponent();
-            string forCaptcha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            char [] stringChars = new char[8];
-            for (int i = 0; i < stringChars.Length; i++)
+            try
             {
-                stringChars[i] = forCaptcha[rnd.Next(forCaptcha.Length)];
+                InitializeComponent();
+                string forCaptcha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                char[] stringChars = new char[8];
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = forCaptcha[rnd.Next(forCaptcha.Length)];
+                }
+                string finalString = new string(stringChars);
+                Captcha.Text = finalString;
             }
-            string finalString = new string(stringChars);
-            Captcha.Text = finalString;
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка генерации капчи", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
         Random rnd = new Random();
         
@@ -42,7 +51,7 @@ namespace Cinema.Windows
             {
                 if (Captcha.Text != TbCaptcha.Text)
                 {
-                    MessageBox.Show("Errors");
+                    MessageBox.Show("Неверно введена капча", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -67,7 +76,7 @@ namespace Cinema.Windows
                         .Where(i => i.Email == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
                         if (authUser != null)
                         {
-                            MainWindow mainWindow = new MainWindow();
+                            MainWindow mainWindow = new MainWindow(authUser.IdUser);
                             mainWindow.Show();
                             this.Close();
                         }
@@ -82,7 +91,6 @@ namespace Cinema.Windows
             catch (Exception ec)
             {
                 MessageBox.Show("Произошла ошибка \n " + ec, "Ошибка");
-                throw;
             }
         }
 

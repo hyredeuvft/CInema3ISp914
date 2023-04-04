@@ -30,40 +30,51 @@ namespace Cinema.Windows
 
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TbLastName.Text) ||
+            try
+            {
+                if (string.IsNullOrWhiteSpace(TbLastName.Text) ||
                 string.IsNullOrWhiteSpace(TbFirstName.Text) ||
                 string.IsNullOrWhiteSpace(DpBirthDay.Text) ||
                 string.IsNullOrWhiteSpace(TbPhoneNumber.Text) ||
                 string.IsNullOrWhiteSpace(TbEmail.Text) ||
                 string.IsNullOrWhiteSpace(PbPassword.Password))
-            {
-                MessageBox.Show("Все поля должны быть заполнены!", "Ошибка");
-                return;
+                {
+                    MessageBox.Show("Все поля должны быть заполнены!", "Ошибка");
+                    return;
+                }
+
+                var authUser = Contextmy.User.ToList()
+                    .Where(x => x.Email == TbEmail.Text).FirstOrDefault();
+                if (authUser != null)
+                {
+                    MessageBox.Show("Такой логин уже занят", "Ошибка");
+                }
+                else
+                {
+                    User user = new User();
+                    user.LastName = TbLastName.Text;
+                    user.FirstName = TbFirstName.Text;
+                    user.Birthday = DpBirthDay.SelectedDate.Value;
+                    user.PhoneNumber = TbPhoneNumber.Text;
+                    user.Email = TbEmail.Text;
+                    user.Password = PbPassword.Password;
+                    user.PersonalBonus = 0;
+                    user.IdTag = 4;
+
+                    Contextmy.User.Add(user);
+                    Contextmy.SaveChanges();
+                    MainWindow mainWindow = new MainWindow(user.IdUser);
+                    mainWindow.Show();
+                    this.Close();
+                }
+
+                
             }
-
-            var authUser = Contextmy.User.ToList()
-                .Where(x => x.Email == TbEmail.Text).FirstOrDefault();
-            if (authUser != null)
+            catch (Exception)
             {
-                MessageBox.Show("Такой логин уже занят", "Ошибка");
-                return;
+                MessageBox.Show("Возникла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            DB.User user = new DB.User();
-            user.LastName = TbLastName.Text;
-            user.FirstName = TbFirstName.Text;
-            user.Birthday = DpBirthDay.SelectedDate.Value;
-            user.PhoneNumber = TbPhoneNumber.Text;
-            user.Email = TbEmail.Text;
-            user.Password = PbPassword.Password;
-            user.PersonalBonus = 0;
-            user.IdTag = 4;
-
-            Contextmy.User.Add(user);
-            Contextmy.SaveChanges();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            
         }
 
         private void TbSignIn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

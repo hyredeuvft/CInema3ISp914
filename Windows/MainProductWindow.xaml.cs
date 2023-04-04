@@ -24,6 +24,7 @@ namespace Cinema.Windows
     /// </summary>
     public partial class MainProductWindow : Window
     {
+        int id;
         List<Product> products = new List<Product>();
         List<string> sortList = new List<string>()
         {
@@ -33,34 +34,68 @@ namespace Cinema.Windows
         };
         public MainProductWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            CmbSort.ItemsSource = sortList;
-            CmbSort.SelectedIndex = 0;
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
 
-            GetListProduct();
-            GetProduct();
+                GetListProduct();
+                GetProduct();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Возникла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+        public MainProductWindow(int a)
+        {
+            try
+            {
+                InitializeComponent();
+                id = a;
+                CmbSort.ItemsSource = sortList;
+                CmbSort.SelectedIndex = 0;
+
+                GetListProduct();
+                GetProduct();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Возникла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void GetListProduct()
         {
-            products = Contextmy.Product.ToList();
-
-            switch (CmbSort.SelectedIndex)
+            try
             {
-                case 0:
-                    products = products.OrderBy(i => i.IdProduct).ToList();
-                    break;
-                case 1:
-                    products = products.OrderBy(i => i.ProductTitle).ToList();
-                    break;
-                case 2:
-                    products = products.OrderBy(i => i.Cost).ToList();
-                    break;
-                default:
-                    break;
+                products = Contextmy.Product.ToList();
+                products = products.Where(x => x.ProductTitle.Contains(TxbSearch.Text)
+                    || x.Cost.ToString().Contains(TxbSearch.Text)).ToList();
+                switch (CmbSort.SelectedIndex)
+                {
+                    case 0:
+                        products = products.OrderBy(i => i.IdProduct).ToList();
+                        break;
+                    case 1:
+                        products = products.OrderBy(i => i.ProductTitle).ToList();
+                        break;
+                    case 2:
+                        products = products.OrderBy(i => i.Cost).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                LvFilmList.ItemsSource = products;
             }
-            LvFilmList.ItemsSource = products;
+            catch (Exception)
+            {
+                MessageBox.Show("Возникла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void GetProduct()
@@ -93,8 +128,15 @@ namespace Cinema.Windows
 
         private void BtnFilm_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(id);
             mainWindow.Show();
+            this.Close();
+        }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            LKUserWindow lKUserWindow = new LKUserWindow(id);
+            lKUserWindow.Show();
             this.Close();
         }
     }

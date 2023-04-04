@@ -25,18 +25,19 @@
             />
         <StackPanel Grid.Column="0">
             <Image     x:Name="ProductPhoto"
-                       Height="318"
-                       Width="198">
+                       Height="285"
+                       Width="198"
+                       Margin="0 25 0 20">
+                <Image.Source>
+                    <Binding Path="PhotoPath">
+                        <Binding.TargetNullValue>
+                            <ImageSource>
+                                /Res/noImage.png
+                            </ImageSource>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </Image.Source>
             </Image>
-            <Button x:Name="ChangeImage"
-                    Style="{StaticResource btnStyle}"
-                    Content="Выбрать фото"
-                    Height="50"
-                    Width="200"
-                    FontSize="24"
-                    Margin="0 15 0 25"
-                    Click="ChangeImage_Click"
-                />
             <TextBlock x:Name="TbTitle"
                            FontSize="22"
                            FontWeight="Bold"

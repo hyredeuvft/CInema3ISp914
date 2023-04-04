@@ -52,6 +52,7 @@
             <TextBlock x:Name="Captcha"
                        Text=""
                      Width="100"
+                       FontFamily="Comic Sans MS"
                        FontSize="18"
                        HorizontalAlignment="Left"
                        Margin="0 15 0 0"

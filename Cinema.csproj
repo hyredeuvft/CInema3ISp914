@@ -224,6 +224,9 @@
     <Compile Include="Windows\InfoProductWindow.xaml.cs">
       <DependentUpon>InfoProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\LKUserWindow.xaml.cs">
+      <DependentUpon>LKUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainProductWindow.xaml.cs">
       <DependentUpon>MainProductWindow.xaml</DependentUpon>
     </Compile>
@@ -306,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\InfoProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LKUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -45,7 +45,6 @@ namespace Cinema.Pages
             catch (Exception)
             {
                 MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
             }
             
         }
@@ -80,7 +79,6 @@ namespace Cinema.Pages
             catch (Exception)
             {
                 MessageBox.Show("Произошла ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
             }
             
         }

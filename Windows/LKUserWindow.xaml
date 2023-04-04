@@ -1,0 +1,104 @@
+﻿<Window x:Class="Cinema.Windows.LKUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema.Windows"
+        mc:Ignorable="d"
+        Title="LKUserWindow" 
+        Height="900" Width="1200"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="21*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                    >
+            <TextBlock Text="Фамилия"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbLastName"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Имя"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbFirstName"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Отчество"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbPatronymic"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Дата рождения"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <DatePicker  x:Name="DpBirthDay"
+                         FontSize="14"
+                         Height="30"
+                         Width="200"
+                         Margin="0 10 0 0"
+                         HorizontalAlignment="Center"
+                       />
+            <TextBlock Text="Номер телефона"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbPhoneNumber"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Email"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 35 0 0"
+                       />
+            <TextBox   x:Name="TbEmail"
+                       Style="{StaticResource ResourceKey=tbStyle}"
+                       Margin="0 10 0 0"
+                       />
+            <TextBlock Text="Пароль"
+                       FontSize="18"
+                       HorizontalAlignment="Left"
+                       Margin="0 20 0 0"
+                       />
+            <TextBox   x:Name="TbPassword"
+                           Style="{StaticResource ResourceKey=tbStyle}"
+                           Margin="0 10 0 0"
+                       />
+        </StackPanel>
+        <WrapPanel Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Button x:Name="btnSave"
+                    Content="Сохранить"
+                    Style="{StaticResource btnStyle}"
+                    Margin="10" Click="btnSave_Click"/>
+            <Button x:Name="btnBack"
+                    Content="Назад"
+                    Style="{StaticResource btnStyle}"
+                    Margin="10" Click="btnBack_Click"/>
+            <Button x:Name="btnExit"
+                    Content="Выход"
+                    Style="{StaticResource btnStyle}"
+                    Margin="10" Click="btnExit_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>

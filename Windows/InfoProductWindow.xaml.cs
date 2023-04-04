@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using Cinema.ClassHelper;
 using Cinema.DB;
 using Cinema.Windows;
 using Microsoft.Win32;
+using static System.Net.WebRequestMethods;
 using static Cinema.ClassHelper.EFClass;
 
 namespace Cinema.Windows
@@ -26,7 +28,6 @@ namespace Cinema.Windows
     public partial class InfoProductWindow : Window
     {
         List<Product> products = new List<Product>();
-        private string pathPhoto = null;
         public InfoProductWindow()
         {
             InitializeComponent();
@@ -40,34 +41,47 @@ namespace Cinema.Windows
 
         private void GetInfo(Product product) 
         {
-            TbTitle.Text = product.ProductTitle;
-            TbTitle2.Text = product.ProductTitle;
-            TbCost.Text = Convert.ToString(product.Cost);
-            TbCost2.Text = Convert.ToString(product.Cost);
-            TbVolume.Text = Convert.ToString(product.Volume);
-            TbVolume2.Text = Convert.ToString(product.Volume);
-            TbCount.Text = Convert.ToString(product.Count);
-            var Id = Contextmy.Category.ToList().Where(i => i.IdCategory == product.IdCategory).FirstOrDefault();
-            TbCategory.Text = Id.CategoryTitle;
+            try
+            {
+                TbTitle.Text = product.ProductTitle;
+                TbTitle2.Text = product.ProductTitle;
+                TbCost.Text = Convert.ToString(product.Cost);
+                TbCost2.Text = Convert.ToString(product.Cost);
+                TbVolume.Text = Convert.ToString(product.Volume);
+                TbVolume2.Text = Convert.ToString(product.Volume);
+                TbCount.Text = Convert.ToString(product.Count);
+                var Id = Contextmy.Category.ToList().Where(i => i.IdCategory == product.IdCategory).FirstOrDefault();
+                TbCategory.Text = Id.CategoryTitle;
+                if (product.PhotoPath != null)
+                {
+                    using (MemoryStream stream = new MemoryStream(product.PhotoPath))
+                    {
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                        bitmapImage.StreamSource = stream;
+                        bitmapImage.EndInit();
+                        ProductPhoto.Source = bitmapImage;
+                    }
+                }
+                else
+                {
+                    ProductPhoto.Source = new BitmapImage(new Uri(@"/Res/noImage.png", UriKind.Relative));
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Не удалось вывести информацию о продукте", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainProductWindow mainWindow = new MainProductWindow();
             mainWindow.Show();
             this.Close();
-        }
-
-        private void ChangeImage_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                ProductPhoto.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                pathPhoto = openFileDialog.FileName;
-            }
         }
     }
 }
