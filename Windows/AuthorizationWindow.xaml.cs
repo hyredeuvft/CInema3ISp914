@@ -49,44 +49,52 @@ namespace Cinema.Windows
         {
             try
             {
-                if (Captcha.Text != TbCaptcha.Text)
+                if (TbLogin.Text == "" || TbLogin == null || PbPassword.Password == "" || PbPassword == null)
                 {
-                    MessageBox.Show("Неверно введена капча", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Заполните все поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    if(TbLogin.Text.Substring(0, 3) == "EMP")
+                    if (Captcha.Text != TbCaptcha.Text)
                     {
-                        var authEmp = Contextmy.Employee.ToList()
-                        .Where(i => i.Login == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
-                        if (authEmp != null)
-                        {
-                            NavigateWindow mainWindow = new NavigateWindow();
-                            mainWindow.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Такой пользователь не найден", "Ошибка");
-                        }
+                        MessageBox.Show("Неверно введена капча", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        var authUser = Contextmy.User.ToList()
-                        .Where(i => i.Email == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
-                        if (authUser != null)
+                        if (TbLogin.Text.Substring(0, 3) == "EMP")
                         {
-                            MainWindow mainWindow = new MainWindow(authUser.IdUser);
-                            mainWindow.Show();
-                            this.Close();
+                            var authEmp = Contextmy.Employee.ToList()
+                            .Where(i => i.Login == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
+                            if (authEmp != null)
+                            {
+                                NavigateWindow mainWindow = new NavigateWindow();
+                                mainWindow.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                            var authUser = Contextmy.User.ToList()
+                            .Where(i => i.Email == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
+                            if (authUser != null)
+                            {
+                                MainWindow mainWindow = new MainWindow(authUser.IdUser);
+                                mainWindow.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Такой пользователь не найден", "Ошибка");
+                            }
                         }
+
                     }
-                        
                 }
+                
             }
             catch (Exception ec)
             {
