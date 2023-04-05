@@ -9,6 +9,12 @@
         Height="900" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <RadialGradientBrush RadiusX="0.9" RadiusY="0.9">
+                <GradientStop Color="#8B74D4"/>
+                <GradientStop Color="#220A6E" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"/>
             <RowDefinition Height="21*"/>

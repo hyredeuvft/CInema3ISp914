@@ -42,6 +42,7 @@
                   x:Name="Dg"
                 Grid.Row="1"
                   AutoGenerateColumns="False"
+            IsReadOnly="True"
             VerticalScrollBarVisibility="Hidden">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IdProduct" Binding="{Binding IdProduct}"/>
@@ -50,6 +51,7 @@
                 <DataGridTextColumn Header="Volume" Binding="{Binding Volume}"/>
                 <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
                 <DataGridTextColumn Header="IdCategory" Binding="{Binding IdCategory}"/>
+                <DataGridTextColumn Header="PhotoPath" Binding="{Binding PhotoPath}"/>
             </DataGrid.Columns>
 
         </DataGrid>

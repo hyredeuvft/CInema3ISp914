@@ -27,16 +27,18 @@ namespace Cinema.Windows
     /// </summary>
     public partial class InfoFilmWindow : Window
     {
+        int id;
         List<Film> films = new List<Film>();
         public InfoFilmWindow()
         {
             InitializeComponent();
         }
 
-        public InfoFilmWindow(Film film)
+        public InfoFilmWindow(Film film, int a)
         {
             InitializeComponent();
             GetInfo(film);
+            id = a;
         }
 
         private void GetInfo(Film film)
@@ -96,7 +98,7 @@ namespace Cinema.Windows
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(id);
             mainWindow.Show();                
             this.Close();
         }

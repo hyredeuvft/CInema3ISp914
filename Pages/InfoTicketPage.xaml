@@ -41,6 +41,7 @@
         <DataGrid 
                   x:Name="Dg"
                 Grid.Row="1"
+            IsReadOnly="True"
                   AutoGenerateColumns="False"
             VerticalScrollBarVisibility="Hidden">
             <DataGrid.Columns>

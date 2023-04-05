@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cinema"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="800" Width="1200"
+        Height="850" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#8C6DD7">
         <Grid.RowDefinitions>
@@ -23,24 +23,6 @@
                    FontWeight="Medium"
                    Margin="0,-8,0,0"
             />
-        <!--<Label x:Name="LbTime"
-               Width="110"
-               Height="50" 
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center"
-               FontSize="20"
-               Margin="1090,0,0,0"
-               Grid.Row="3"
-            />
-        <Label x:Name="LbDate"
-               Width="211"
-               Height="50"
-               FontSize="20"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Center"
-               Margin="879,0,0,0"
-               Grid.Row="3"
-            />-->
         <WrapPanel Grid.Row="1" VerticalAlignment="Center">
             <TextBlock Text="Поиск"
                        Margin="10"

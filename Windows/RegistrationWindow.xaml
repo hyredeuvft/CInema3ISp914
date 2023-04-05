@@ -59,10 +59,11 @@
                        Style="{StaticResource ResourceKey=tbStyle}"
                        Margin="0 10 0 0"
                        />
-            <TextBlock Text="Введите дату рождения"
+            <TextBlock Text="Введите дату рождения (до 2017 года)"
                        FontSize="18"
+                       TextWrapping="Wrap"
                        HorizontalAlignment="Left"
-                       Margin="0 35 0 0"
+                       Margin="0 35 0 0" Height="47" Width="263"
                        />
             <DatePicker  x:Name="DpBirthDay"
                          FontSize="14"

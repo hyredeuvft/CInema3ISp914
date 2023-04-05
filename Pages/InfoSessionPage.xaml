@@ -42,6 +42,7 @@
                   x:Name="Dg"
                 Grid.Row="1"
                   AutoGenerateColumns="False"
+            IsReadOnly="True"
             VerticalScrollBarVisibility="Hidden">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IdSessionFilm" Binding="{Binding IdSessionFilm}"/>

@@ -68,7 +68,7 @@ namespace Cinema.Pages
                         films = films.OrderBy(i => i.MovieTitle).ToList();
                         break;
                     case 2:
-                        films = films.OrderBy(i => i.Rating).ToList();
+                        films = films.OrderByDescending(i => i.Rating).ToList();
                         break;
                     case 3:
                         films = films.OrderBy(i => i.PremierDate).ToList();

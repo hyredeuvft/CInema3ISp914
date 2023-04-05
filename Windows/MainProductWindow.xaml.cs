@@ -110,7 +110,7 @@ namespace Cinema.Windows
             if (LvFilmList.SelectedItem is Product)
             {
                 Product product = LvFilmList.SelectedItem as Product;
-                InfoProductWindow infoProductWindow = new InfoProductWindow(product);
+                InfoProductWindow infoProductWindow = new InfoProductWindow(product, id);
                 infoProductWindow.Show();
                 this.Close();
             }

@@ -112,7 +112,10 @@ namespace Cinema.Pages
                     editFilm.IdMovieStudio = (CmbMovieStudio.SelectedItem as MovieStudio).IdMovieStudio;
                     editFilm.MovieBudget = Convert.ToDecimal(TbMovieBudget.Text);
                     editFilm.IdMovieDistributor = (CmbMovieDistributor.SelectedItem as MovieDistributor).IdMovieDistributor;
-
+                    if (pathPhoto != null)
+                    {
+                        editFilm.PhotoPath = File.ReadAllBytes(pathPhoto);
+                    }
                     Contextmy.SaveChanges();
                 }
                 else

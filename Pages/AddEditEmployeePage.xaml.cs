@@ -78,6 +78,10 @@ namespace Cinema.Pages
         {
             try
             {
+                if (TbLName == null || TbLName.Text == "")
+                {
+
+                }
                 if (isEdit)
                 {
                     editEmployee.LastName = TbLName.Text;

@@ -78,5 +78,17 @@ namespace Cinema.Windows
             InfoUserPage infoUserPage = new InfoUserPage();
             frame.Navigate(infoUserPage);
         }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            var DialogResult = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (DialogResult == MessageBoxResult.Yes)
+            {
+                AuthorizationWindow authorizationWindow = new AuthorizationWindow();
+                authorizationWindow.Show();
+                this.Close();
+            }
+            else { }
+        }
     }
 }

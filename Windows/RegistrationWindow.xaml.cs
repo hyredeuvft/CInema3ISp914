@@ -51,21 +51,30 @@ namespace Cinema.Windows
                 }
                 else
                 {
-                    User user = new User();
-                    user.LastName = TbLastName.Text;
-                    user.FirstName = TbFirstName.Text;
-                    user.Birthday = DpBirthDay.SelectedDate.Value;
-                    user.PhoneNumber = TbPhoneNumber.Text;
-                    user.Email = TbEmail.Text;
-                    user.Password = PbPassword.Password;
-                    user.PersonalBonus = 0;
-                    user.IdTag = 4;
+                    if (Int64.TryParse(TbPhoneNumber.Text, out long i))
+                    {
+                        User user = new User();
+                        user.LastName = TbLastName.Text;
+                        user.FirstName = TbFirstName.Text;
+                        user.Birthday = DpBirthDay.SelectedDate.Value;
+                        user.PhoneNumber = TbPhoneNumber.Text;
+                        user.Email = TbEmail.Text;
+                        user.Password = PbPassword.Password;
+                        user.PersonalBonus = 0;
+                        user.IdTag = 4;
 
-                    Contextmy.User.Add(user);
-                    Contextmy.SaveChanges();
-                    MainWindow mainWindow = new MainWindow(user.IdUser);
-                    mainWindow.Show();
-                    this.Close();
+                        Contextmy.User.Add(user);
+                        Contextmy.SaveChanges();
+                        MessageBox.Show("Вы успешно зарегестрировались!", "Успех!");
+                        AuthorizationWindow mainWindow = new AuthorizationWindow();
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Введите данные правильно!", "Ошибка");
+                    }
+                    
                 }
 
                 

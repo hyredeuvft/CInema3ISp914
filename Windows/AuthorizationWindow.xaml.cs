@@ -61,7 +61,7 @@ namespace Cinema.Windows
                         .Where(i => i.Login == TbLogin.Text && i.Password == PbPassword.Password).FirstOrDefault();
                         if (authEmp != null)
                         {
-                            MainWindow mainWindow = new MainWindow();
+                            NavigateWindow mainWindow = new NavigateWindow();
                             mainWindow.Show();
                             this.Close();
                         }

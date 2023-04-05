@@ -47,23 +47,13 @@ namespace Cinema
         {
             try
             {
+
                 InitializeComponent();
                 id = a;
                 CmbSort.ItemsSource = sortList;
                 CmbSort.SelectedIndex = 0;
                 GetListFilm();
                 GetFilm();
-
-                //Thread thread = new Thread(() =>
-                //{
-                //    while (true)
-                //    {
-                //        Dispatcher.Invoke(() => LbTime.Content = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second);
-                //        Dispatcher.Invoke(() => LbDate.Content = DateTime.Now.DayOfWeek + " " + DateTime.Now.Day + " " + DateTime.Now.Month + " " + DateTime.Now.Year);
-                //        Thread.Sleep(400);
-                //    }
-                //});
-                //thread.Start();
             }
             catch (Exception)
             {
@@ -90,7 +80,7 @@ namespace Cinema
                         films = films.OrderBy(i => i.MovieTitle).ToList();
                         break;
                     case 2:
-                        films = films.OrderBy(i => i.Rating).ToList();
+                        films = films.OrderByDescending(i => i.Rating).ToList();
                         break;
                     case 3:
                         films = films.OrderBy(i => i.PremierDate).ToList();
@@ -119,7 +109,7 @@ namespace Cinema
             if (LvFilmList.SelectedItem is Film)
             {
                 Film film = LvFilmList.SelectedItem as Film;
-                InfoFilmWindow infoFilmWindow = new InfoFilmWindow(film);
+                InfoFilmWindow infoFilmWindow = new InfoFilmWindow(film, id);
                 infoFilmWindow.Show();
                 this.Close();
             }

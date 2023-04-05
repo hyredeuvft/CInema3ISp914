@@ -42,6 +42,7 @@
                   x:Name="Dg"
                 Grid.Row="1"
                   AutoGenerateColumns="False"
+            IsReadOnly="True"
             VerticalScrollBarVisibility="Hidden">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IdFilm" Binding="{Binding IdFilm}"/>
@@ -55,6 +56,7 @@
                 <DataGridTextColumn Header="IdMovieStudio" Binding="{Binding IdMovieStudio}"/>
                 <DataGridTextColumn Header="MovieBudget" Binding="{Binding MovieBudget}"/>
                 <DataGridTextColumn Header="IdMovieDistributor" Binding="{Binding IdMovieDistributor}"/>
+                <DataGridTextColumn Header="PhotoPath" Binding="{Binding PhotoPath}"/>
             </DataGrid.Columns>
 
         </DataGrid>

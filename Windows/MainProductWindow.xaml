@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cinema.Windows"
         mc:Ignorable="d"
         Title="MainProductWindow" 
-        Height="800" Width="1200"
+        Height="850" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#8C6DD7">
         <Grid.RowDefinitions>
@@ -118,7 +118,7 @@
                 Height="45"
                 Width="45"
                 HorizontalAlignment="Left"
-                Margin="1116,629,0,10"
+                Margin="1116,604,0,35"
                 Content="ЛК"
                 Click="btn_Click" Grid.RowSpan="2"
             />

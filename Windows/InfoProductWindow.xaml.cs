@@ -28,15 +28,17 @@ namespace Cinema.Windows
     public partial class InfoProductWindow : Window
     {
         List<Product> products = new List<Product>();
+        int id;
         public InfoProductWindow()
         {
             InitializeComponent();
         }
 
-        public InfoProductWindow(Product product) 
+        public InfoProductWindow(Product product, int a) 
         {
             InitializeComponent();
             GetInfo(product);
+            id = a;
         }
 
         private void GetInfo(Product product) 
@@ -79,7 +81,7 @@ namespace Cinema.Windows
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            MainProductWindow mainWindow = new MainProductWindow();
+            MainProductWindow mainWindow = new MainProductWindow(id);
             mainWindow.Show();
             this.Close();
         }

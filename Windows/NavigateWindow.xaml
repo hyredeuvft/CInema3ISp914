@@ -55,11 +55,18 @@
                     Content="Покупатели"
                     Margin="5"
                     Style="{StaticResource btnStyle}" Click="btnForUser_Click"/>
+
         </WrapPanel>
+        <Button x:Name="btn"
+                    Content="Выход"
+                    Style="{StaticResource btnStyle}" 
+                    Margin="1347,12,0,12"
+                    Click="btn_Click" 
+                HorizontalAlignment="Left"/>
         <Frame x:Name="frameMenu"
                NavigationUIVisibility="Hidden"
             Grid.Row="1">
-            
+
         </Frame>
     </Grid>
 </Window>

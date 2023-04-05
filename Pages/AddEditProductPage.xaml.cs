@@ -94,6 +94,10 @@ namespace Cinema.Pages
 
                     editProduct.Count = (byte?)Convert.ToInt16(TbCount.Text);
                     editProduct.IdCategory = (CmbCategory.SelectedItem as Category).IdCategory;
+                    if (pathPhoto != null)
+                    {
+                        editProduct.PhotoPath = File.ReadAllBytes(pathPhoto);
+                    }
 
                     Contextmy.SaveChanges();
                 }
